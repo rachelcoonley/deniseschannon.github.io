@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Load Balancers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation for Rancher">
+    <link href="/docs/favicon.png" rel="shortcut icon" type="image/png" sizes="16x16">
+    <link href="/docs/css/syntax.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/font-awesome/css/font-awesome.min.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/lato/lato.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/lacsso.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/slicknav.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/rancher-docs.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+</head>
+
+<body class="bg-default">
+    <div class="row body">
+    <header class="page-header">
+      <div class="wrap clearfix">
+        <nav role="navigation" id="js-responsive-nav" class="clearfix responsive-nav"><a class="nav-toggle"></a>
+          <a class="nav-logo logo-caas btn bg-transparent"><img src="/docs/img/rancher-logo-nopadding.svg" class="img-responsive" alt="Rancher" data-pin-nopin="true"></a>
+          <ul class="nav-main nav-list">
+            <li><a href="http://rancher.com/">Back to Rancher.com</a></li>
+
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="https://github.com/rancher/rancher#installation" id="rnchrdm-nav-download" title="Download Rancher" target="_blank"><img src="/docs/img/header-download.svg" alt="Download Rancher" height="12" width="14"> Download Rancher</a></li>
+              <li><a href="http://rancher.com/support" id="rnchrdm-nav-reqsupport" title="Request Support"><i class="fa fa-question-circle" aria-hidden="true"></i>
+ Request Support</a></li>
+            </ul>
+          </ul>
+      </nav>
+    </div>
+    <h1>Rancher Docs</h1>
+  </header>
+  <div class="clearfix"></div>
+  <div class="wrap clearfix">
+        <div class="col span-3 mt-0 mr-0 sidebar">
+        <!--Start Google Search-->
+              <div class="gcse-search" id="google-search"></div>
+              <script>
+              var match = window.location.pathname.match(/\/rancher\/([^\/]+)/);
+              if (match) {
+                  document.getElementById('google-search').setAttribute('data-defaultToRefinement', match[1]);
+              }
+
+              (function() {
+                  var cx = '007896692384436596364:60akf3bfmxm';
+                  var gcse = document.createElement('script');
+                  gcse.type = 'text/javascript';
+                  gcse.async = true;
+                  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(gcse, s);
+              })();
+              </script>
+              <!--End Google Search-->
+
+<ul id="menu">
+    <li><a href="/docs/rancher/v1.6/zh/">简介</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/quick-start-guide/">快速开始</a></li>
+    <li>
+        <a href="#">安装Rancher<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/">安装 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#安装需求">安装需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#rancher-server-标签">Rancher Server标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署-non-ha">启动 Rancher Server - 单容器部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---多节点的ha部署">启动 Rancher Server - 多节点的HA部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#ha部署需求">HA部署需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---使用外部数据库">启动 Rancher Server - 单容器部署 - 使用外部数据库</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---挂载mysql数据库的数据目录">启动 Rancher Server - 单容器部署 - 挂载MYSQL数据库的数据目录</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#使用aws的elasticclassic-load-balancer作为rancher-server-ha的负载均衡器">使用AWS的ELB作为HA的负载均衡器</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#tls认证使用adopenldap">使用TLS认证的AD/OPENLDAP</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#在http代理后方启动-rancher-server">在HTTP代理后启动 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/selinux/">在SELinux模式下使用Rancher</a></li>
+          <li>
+               <a href="#">安装Rancher并使用SSL<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#需求">需求</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#nginx-配置模版">NGINX配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#apache-配置例子">Apache配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#haproxy-配置例子">HAProxy配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用aws的elastic-load-balancer作为rancher-server-ha的负载均衡器并使用ssl">使用AWS的ELB作为HA的负载均衡器并使用SSL</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#f5-big-ip配置示例">F5 BIG-IP配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用自签名证书-beta">使用自签名证书</a></li>
+               </ul>
+          </li>
+          <li>
+               <a href="#">内网启动Rancher<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用私有镜像仓库">使用私有镜像仓库</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用http代理">使用HTTP代理</a></li>
+               </ul>
+          </li>
+        </ul>
+    </li>
+    <li>
+         <a href="#">升级Rancher Server<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/">升级Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#rancher-server-tags">Rancher Server标签</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#基础设施服务]">升级基础设施服务</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#升级ha架构">升级HA架构的Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---外部数据库">升级非HA模式的Rancher Server - 外部数据库</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---绑定挂载的mysql卷">升级非HA模式的Rancher Server - 绑定挂载的MYSQL卷</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#没有互联网访问的rancher服务器">升级内网中的Rancher Server</a></li>
+        </ul>
+     </li>
+    <li>
+         <a href="#">系统设置<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li>
+                <a href="#">访问控制方式<i class="pull-right fa fa-angle-down"></i></a>
+                <ul>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#活动目录">Active Directory</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#azure-ad">Azure AD</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#github">Github</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#本地身份认证">本地身份认证</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#openldap">OpenLDAP</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#shibboleth">Shibboleth</a></li>
+                </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#访问控制">访问控制</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#限制并发登陆">限制并发登陆</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/accounts/">账户</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#主机注册">注册主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#应用商店">应用商店</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/machine-drivers/">主机驱动</a></li>
+        </ul>
+    </li>
+    <li>
+          <a href="#">环境<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+            <li><a href="/docs/rancher/v1.6/zh/environments/">环境管理</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#什么是环境模版">环境模版</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#成员角色">环境中的角色</a></li>
+          </ul>
+    </li>
+    <li>
+        <a href="#">主机<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/">主机简介</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#docker版本适用对比">支持的Docker版本</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机标签">主机标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机调度地址">主机调度地址</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在代理后的主机">在代理后的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/custom/">添加自定义主机</a></li>
+          <li>
+              <a href="#">添加云主机<i class="pull-right fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/amazon/">添加Amazon EC2主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/azure/">添加Azure主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/digitalocean/">添加DigitalOcean主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/exoscale/">添加Exoscale主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/packet/">添加Packet主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/rackspace/">添加Rackspace主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/other/">添加其他云服务商的主机</a></li>
+              </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#访问云提供商的主机">访问云提供商的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在rancher内删除主机">删除主机</a></li>
+        </ul>
+    </li>
+    <li>
+      <a href="#">镜像仓库<i class="pull-right fa fa-angle-down"></i></a>
+      <ul>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/">镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#不安全的镜像库">不安全的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#自签名证书">自签名证书</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用亚马逊的ecr镜像库">使用亚马逊的ECR镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用google容器镜像仓库">使用Google容器镜像仓库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#更改默认的镜像库">更改默认的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#限制镜像库的使用">限制镜像库的使用</a></li>
+      </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/environments/certificates/">证书</a></li>
+    <li>
+      <a href="#">系统服务<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/">基础设施服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/networking/">网络</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/network-policy/">网络策略</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/load-balancer">负载均衡器</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/dns-service/">DNS服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/metadata-service/">Metadata服务</a></li>
+              <li>
+                  <a href="#">存储服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/">存储服务</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-nfs/">Rancher NFS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-ebs/">Rancher EBS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/">调度器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#多ip主机调度">多IP主机调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#基于资源约束的调度">基于资源约束的调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#在主机上调度指定服务">在主机上调度指定服务</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/audit-log/">审计日志</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/service-accounts/">服务账号</a></li>
+           </ul>
+    </li>
+    <li>
+          <a href="#">Cattle<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/stacks/">应用</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-services/">服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/volumes/">卷</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/">负载均衡</a></li>
+                <li>
+                    <a href="#">在UI中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#如何在ui上新增一个负载均衡">添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#服务规则">服务规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#选择器规则">选择器规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止">SSL会话终止</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#负载均衡的会话粘性">负载均衡的会话粘性</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义haproxycfg">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#标签调度负载均衡">标签调度负载均衡</a></li>
+                      </ul>
+                </li>
+                <li>
+                    <a href="#">在CLI和Compose中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#用rancher-compose-添加负载均衡">用Rancher Compose 添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#源端口">源端口</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#端口规则">端口规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#证书">证书</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义配置">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#会话粘性策略">会话粘性策略</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#load-balancer-example-l7">七层负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#内部负载均衡例子">内部负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止-example">SSL会话终止示例</a></li>
+                      </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-external-services/">外部服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-service-alias/">服务别名</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/health-checks/">健康检查</a></li>
+                <li>
+                    <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/">调度</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在ui中添加标签">在UI中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在rancher-compose中添加标签">在Rancher Compose中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#调度标签表">调度标签表</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/upgrading/">升级服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/internal-dns-service/">Cattle环境中的内部DNS服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/external-dns-service/">外部DNS服务</a></li>
+                <li>
+                    <a href="#">Rancher-Compose<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/">Rancher Compose</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/commands/">指令与参数</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/environment-interpolation/">环境插值</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/build/">使用AWS S3构建镜像</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/secrets/">密文 - 实验性的</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/webhook-service/">Webhooks</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/labels/">标签</a></li>
+          </ul>
+    </li>
+    <li>
+          <a href="#">Kubernetes<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/">启动Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/resiliency-planes/">弹性平面</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/providers/">Cloud Providers</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/private-registry/">私有镜像仓库</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/rbac/">RBAC</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/disaster-recovery/">灾难恢复</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/backups/">备份</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/storage/">持久化存储</a></li>
+              <li>
+                  <a href="#">插件支持<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/">插件支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#helm">Helm</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#skydns">SkyDNS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">Ingress支持与配置<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/">Ingress支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#基于主机路由配置-ingress-资源">基于主机路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#使用基于路径的路由配置ingress资源">使用基于路径的路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例两个负载均衡器使用交替的端口">多个负载均衡器使用不同的端口</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例使用tls">使用 TLS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#禁用http">禁用HTTP</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例用户定制">示例用户定制</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在所有主机上运行负载均衡器">所有主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在特定主机上运行负载均衡器">特定主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#例将流量导向同一主机上的不同容器">将流量导向同一主机上的不同容器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在同一主机上对容器的流量进行优先级排序">在同一主机上对容器的流量进行优先级排序</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/upgrading/">升级Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/deleting/">删除Kubernetes</a></li>
+
+          </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/mesos/">Mesos</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/swarm/">Swarm - 实验性的 </a></li>
+    <li><a href="/docs/rancher/v1.6/zh/windows/">Windows - 实验性的</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/native-docker/">以原生Docker命令行的形式使用Rancher</a></li>
+    <li>
+            <a href="#">应用商店<i class="pull-right fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/">应用商店</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/private-catalog/">创建私有应用商店</a></li>
+            </ul>
+        </li>
+    <li><a href="#">Rancher命令行<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/cli/">Rancher命令行</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/commands/">命令和选项</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/variable-interpolation/">变量替换</a></li>
+        </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/en/api/v2-beta/">API文档</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/contributing/">Rancher社区贡献</a></li>
+    <li>
+        <a href="#">常见问题<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/server/">Rancher Server的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/agents/">Rancher Agent的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/troubleshooting/">常见的故障排查与修复方法</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="btn-docs">历史文档<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.5/zh/">Rancher v1.5</a></li>
+            <li><a href="/docs/rancher/v1.4/zh/">Rancher v1.4</a></li>
+            <li><a href="/docs/rancher/v1.3/zh/">Rancher v1.3</a></li>
+            <li><a href="/docs/rancher/v1.2/zh/">Rancher v1.2</a></li>
+            <li><a href="/docs/rancher/v1.1/zh/">Rancher v1.1</a></li>
+            <li><a href="/docs/rancher/v1.0/en/">Rancher v1.0</a></li>
+        </ul>
+    </li>
+</ul>
+
+</div>
+<div class="col span-9">
+    <div class="content-container">
+        <h2 id="section">负载均衡</h2>
+<hr />
+
+<p>Rancher支持多种负载均衡驱动，通过在它之上建立代理规则，可以将网络及应用流量分发至指定的容器中。负载均衡的目标服务中的容器都会被Rancher自动注册为负载均衡的目标。在Rancher中，将负载均衡加入到应用中是一件非常容易的事情。</p>
+
+<p>默认情况下，Rancher提供一个基于HAProxy的托管的负载均衡，它可以被手动扩容至多台主机。在接下来的例子中将会涉及到负载均衡中不同的配置项，这些配置项主要以HAProxy为参考。我们计划支持除HAProxy以外的其他负载均衡驱动，但这些配置项都会是相同的。</p>
+
+<p>我们使用round robin算法分发流量至目标服务。这个算法可在<a href="#自定义haproxycfg">自定义HAProxy.cfg</a>中进行自定义。<br />
+另外，你可以配置负载均衡来将流量分发至与负载均衡容器处于相同主机的目标容器。通过给负载均衡设置一个特定的<a href="/docs/rancher/v1.6/zh/cattle/scheduling/#target-service-labels">标签</a>，能够将负载均衡的目标限定在同一台主机中的目标容器（例如 <code class="highlighter-rouge">io.rancher.lb_service.target=only-local</code>），或者优先转发至同一台主机中的目标容器(例如： <code class="highlighter-rouge">io.rancher.lb_service.target=prefer-local</code>)。</p>
+
+<p>我们将会查看在<a href="#如何在ui上新增一个负载均衡">UI</a>和<a href="#用rancher-compose-添加负载均衡">Rancher Compose</a>中的负载均衡的配置项，并且给出<a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#adding-a-load-balancer-in-the-ui">UI</a>和<a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#adding-a-load-balancer-with-rancher-compose">Rancher Compose</a>的用例。</p>
+
+<h3 id="ui">如何在UI上新增一个负载均衡</h3>
+
+<p>我们将为我们在<a href="/docs/rancher/v1.6/zh/cattle/adding-services/#在ui中添加服务">添加服务部分</a>中创建的“letschat”应用新增一个负载均衡.</p>
+
+<p>首先，我们从添加一个负载均衡服务开始，点击”添加服务“旁边的下拉图标，找到<strong>添加负载均衡</strong>并点击它。</p>
+
+<p>进入添加页面后，容器<code class="highlighter-rouge">数量</code>默认是1，填入“名称”，如“LetsChatLB”。</p>
+
+<p><code class="highlighter-rouge">端口规则</code>下，<code class="highlighter-rouge">访问</code>选择默认的<code class="highlighter-rouge">公开</code>，<code class="highlighter-rouge">协议</code>选择默认的<code class="highlighter-rouge">HTTP</code>。请求<code class="highlighter-rouge">端口</code>填入<code class="highlighter-rouge">80</code>，<code class="highlighter-rouge">目标</code>选择<code class="highlighter-rouge">letschat</code>服务， 并且端口填入<code class="highlighter-rouge">8080</code>。</p>
+
+<p>点击<strong>创建</strong>。</p>
+
+<p>现在，让我们来实际感受一下负载均衡。在应用视图下， 有一个连接到<code class="highlighter-rouge">80</code>端口的超链接，这是负载均衡中的源端口。如果你点击它，将会在你的浏览器中自动新开一个页签，并指向负载均衡服务所在的主机。请求将会被重定向到其中一个”LetsChat“容器。如果你刷新浏览器，负载均衡服务会把新的请求重定向到“LetsChat”服务下的其他容器中。</p>
+
+<h3 id="section-1">页面上的负载均衡选项</h3>
+
+<p>Rancher提供一个基于HAProxy的容器来重定向流量至目标服务。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 负载均衡只会在那些使用<code class="highlighter-rouge">托管</code>网络的服务中生效，其他网络模式都不会生效。</p>
+</blockquote>
+
+<p>点击<strong>添加服务</strong>旁边的下拉图标，找到<strong>添加负载均衡</strong>并点击它。</p>
+
+<p>你能使用滑块选择<code class="highlighter-rouge">数量</code>，就是负载均衡使用多少个容器。或者，你可以选择<code class="highlighter-rouge">总是在每台主机上运行一个此容器的实例</code>。使用这一个选项, 你的负载均衡容器数量将会随着你<a href="/docs/rancher/v1.6/zh/environments/">环境</a>下的主机数量增减而增减。如果你在<strong>调度</strong>部分设定了调度规则，Rancher将会在满足规则的主机上启动负载均衡。如果你的环境下新增了一台不满足调度规则的主机，负载均衡容器不会在这一台主机中启动。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 负载均衡容器的扩缩容不能超过环境下主机的数量，否则会造成端口冲突，负载容器服务将会被阻碍在<code class="highlighter-rouge">activating</code>状态。它会不断去尝试寻找可用的主机并开启端口，直到你修改它的数量或者<a href="/docs/rancher/v1.6/zh/hosts/">添加主机</a>.</p>
+</blockquote>
+
+<p>你需要提供负载均衡的<strong>名称</strong>，如果有需要的话，你可以添加<strong>描述</strong>。</p>
+
+<p>接下来，你可以定义负载均衡的端口规则。有两种规则类型可供创建。用于目标为特定的已存在的服务的<code class="highlighter-rouge">服务规则</code>和用于匹配一定选择规则的<code class="highlighter-rouge">选择器规则</code>。</p>
+
+<p>当创建了多条服务和选择器规则的时候，请求头和路径规则将会自顶向下按显示在UI上的顺序匹配。</p>
+
+<h4 id="section-2">服务规则</h4>
+
+<p>服务规则指的是端口指向目标容器的规则。</p>
+
+<p>在<strong>访问</strong>选项栏中，你可以决定这个负载均衡端口是否可以被公网访问（就是说是否可以从主机以外访问）或者仅仅在环境内部访问。默认情况下，Rancher假定你希望被公网访问，但是如果你希望仅仅在环境内部被访问，你可以选择<code class="highlighter-rouge">内部</code>。</p>
+
+<p>选择<code class="highlighter-rouge">协议</code>选项栏。获取更多关于我们<a href="#协议">协议选项</a>的信息。如果你选择了需要SSL终端（如 <code class="highlighter-rouge">https</code> or <code class="highlighter-rouge">tls</code>），你将需要在<code class="highlighter-rouge">SSL终端</code>标签页中新增你的认证信息。</p>
+
+<p>接下来，你可以针对流量的来源填写<strong>请求头信息</strong>, <strong>端口</strong> 和 <strong>路径</strong>。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> <code class="highlighter-rouge">42</code> 端口不能被用作负载均衡的源端口，因为它被用于<a href="/docs/rancher/v1.6/zh/cattle/health-checks">健康检查</a>。</p>
+</blockquote>
+
+<h5 id="section-3">请求头信息／路径</h5>
+
+<p>请求头信息是HTTP请求头中的host的属性。请求路径可以是一段特殊的路径。你可以任意设置其中一个或者两者都设置。</p>
+
+<h6 id="section-4">例子:</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>domain1.com -&gt; Service1
+domain2.com -&gt; Service2
+
+domain3.com -&gt; Service1
+domain3.com/admin -&gt; Service2
+</code></pre>
+</div>
+
+<h6 id="section-5">通配符</h6>
+
+<p>当基于HOST值设置路由时，Rancher支持通配符。所支持的语法如下。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*.domain.com -&gt; hdr_end(host) -i .domain.com
+domain.com.* -&gt; hdr_beg(host) -i domain.com.
+</code></pre>
+</div>
+
+<h5 id="section-6">目标服务和端口</h5>
+
+<p>每一个服务规则，你都可以选择你想要的<strong>目标</strong>服务。这些服务列表是基于该环境下所有的服务清单的。每一个服务，你还能选择与之配套的端口。服务上的私有端口通常就是镜像所暴露的端口。</p>
+
+<h4 id="section-7">选择器规则</h4>
+
+<p>在选择器规则中，你需要填写一个<a href="/docs/rancher/v1.6/zh/cattle/labels/#选择器标签">选择器标签</a>而不是特定的服务。选择器基于服务的标签来选择目标服务。当负载均衡被创建的时候，选择器规则将会针对环境下现有的任意一个服务来计算看是否为可匹配的服务。后面新增的服务或者对标签进行修改都会拿来与选择器标签进行匹配。</p>
+
+<p>对于每一个<strong>源端口</strong>，你都可以添加相应的<strong>请求头信息</strong>或<strong>路径</strong>。<a href="/docs/rancher/v1.6/zh/cattle/labels/#选择器标签">选择器标签</a>是基于<strong>目标</strong>的，你能指定一个特定的<strong>端口</strong>接收转发到服务上的流量。服务上的私有端口通常就是镜像所暴露的端口。</p>
+
+<h5 id="section-8">例子: 2 选择器规则</h5>
+
+<ol>
+  <li>源端口: <code class="highlighter-rouge">100</code>; 选择器: <code class="highlighter-rouge">foo=bar</code>; 端口: <code class="highlighter-rouge">80</code></li>
+  <li>源端口: <code class="highlighter-rouge">200</code>; 选择器: <code class="highlighter-rouge">foo1=bar1</code>; 端口: <code class="highlighter-rouge">80</code></li>
+</ol>
+
+<ul>
+  <li>服务A有一个 <code class="highlighter-rouge">foo=bar</code> 标签，它将会匹配第一条规则. 任何指向<code class="highlighter-rouge">100</code>的流量都会被转发到服务A。</li>
+  <li>服务B有一个<code class="highlighter-rouge">foo1=bar</code> 标签，它将会匹配第二条规则. 任何指向<code class="highlighter-rouge">200</code>的流量都会被转发到服务B。</li>
+  <li>服务C有<code class="highlighter-rouge">foo=bar</code>和<code class="highlighter-rouge">foo1=bar1</code>两个标签，它将会匹配两条规则. 任何指向<code class="highlighter-rouge">200</code>和<code class="highlighter-rouge">100</code>的流量都会被转发到服务C.</li>
+</ul>
+
+<blockquote>
+  <p><strong>注意：</strong> 目前，如果你想要将一条选择器规则应用于多个主机名／路径上，你需要使用<a href="#selector">Rancher Compose</a>在目标服务上去设置主机名／路径。</p>
+</blockquote>
+
+<h4 id="ssl">SSL会话终止</h4>
+
+<p><strong>SSL会话终止</strong>标签提供了添加用于<code class="highlighter-rouge">https</code>和<code class="highlighter-rouge">tls</code>协议证书的能力。在<strong>证书</strong>下拉框中，你可以为负载均衡选择主证书。</p>
+
+<p>添加证书前，请阅读<a href="/docs/rancher/v1.6/zh/environments/certificates/">如何添加证书</a>.</p>
+
+<p>为负载均衡添加多个证书是可以实现的。这样相应的证书会基于请求主机名(查看 <a href="https://en.wikipedia.org/wiki/Server_Name_Indication">服务器名称指示</a>)展示给客户端。这个功能可能在那些不支持SNI(它会获取主要证书)的老客户端上失效。对于现代客户端，我们会在能匹配到的列表中提供证书，如果没有匹配成功，就会提供主证书。</p>
+
+<h4 id="section-9">负载均衡的会话粘性</h4>
+
+<p>你可以点击选择负载均衡的<strong>会话粘性</strong>。会话粘性就是你的cookie策略。</p>
+
+<p>Rancher支持以下两种选项：</p>
+
+<ul>
+  <li><strong>无</strong>: 这个选项意味着不会设置cookie策略</li>
+  <li><strong>创建新的Cookie</strong>: 这个选项意味着在你的应用之外会创建cookie。这个cookie是由负载均衡设置在请求与响应中的。这就是会话粘性策略。</li>
+</ul>
+
+<h4 id="haproxycfg">自定义haproxy.cfg</h4>
+
+<p>由于Rancher基于HAProxy来搭建负载均衡，所以你能自定义HAproxy的配置。你在这里定义的配置都会被添加到Rancher生成的配置的最后面。</p>
+
+<h5 id="haproxy">自定义HAProxy配置的例子</h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>global
+    maxconn 4096
+    maxpipes 1024
+
+defaults
+    log global
+    mode    tcp
+    option  tcplog
+
+frontend 80
+    balance leastconn
+
+frontend 90
+    balance roundrobin
+
+backend mystack_foo
+    cookie my_cookie insert indirect nocache postonly
+    server $IP &lt;server parameters&gt;
+
+backend customUUID
+    server $IP &lt;server parameters&gt;
+</code></pre>
+</div>
+
+<h4 id="section-10">标签／调度负载均衡</h4>
+
+<p>我们支持向负载均衡添加标签并且调度负载均衡在哪启动。点击<a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在ui中调度选项">这里</a>查看更多关于标签和调度的信息。</p>
+
+<h3 id="rancher-compose-">用Rancher Compose 添加负载均衡</h3>
+
+<p>在这，我们将一步步为我们之前在<a href="/docs/rancher/v1.6/zh/cattle/adding-services/#使用-rancher-compose-添加服务">创建服务章节</a>创建的”letschat”应用设置一个负载均衡。</p>
+
+<p>点击<a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/">这里</a>查看更多关于如何配置一个Rancher Compose。</p>
+
+<blockquote>
+  <p><strong>注意：</strong>: 在我们的例子中，我们会使用<code class="highlighter-rouge">&lt;version&gt;</code>作为负载均衡镜像的标签。每一个Rancher版本都有特定的，被负载均衡所支持的<code class="highlighter-rouge">lb-service-haproxy</code>版本。</p>
+</blockquote>
+
+<p>我们将会建立一个和我们上面在UI中所使用到的例子一样范例。首先你需要创建一个<code class="highlighter-rouge">docker-compose.yml</code>文件和一个<code class="highlighter-rouge">rancher-compose.yml</code>文件。使用Rancher Compose，我们可以启动一个负载均衡</p>
+
+<h4 id="example-docker-composeyml">Example <code class="highlighter-rouge">docker-compose.yml</code></h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">letschatlb</span><span class="pi">:</span>
+    <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">80</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy:&lt;version&gt;</span>
+</code></pre>
+</div>
+
+<h4 id="example-rancher-composeyml">Example <code class="highlighter-rouge">rancher-compose.yml</code></h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">letschatlb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">letschat</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+</code></pre>
+</div>
+
+<h3 id="rancher-compose--1">Rancher Compose 中的负载均衡配置</h3>
+
+<p>Rancher 提供一个基于HAProxy的容器来做负载均衡。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 负载均衡仅仅在使用托管网络的服务中生效。其他的网络选择都不会生效。</p>
+</blockquote>
+
+<p>负载均衡可以像其他任何一个服务一样被调度。点击<a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在rancher-compose中添加标签">这里</a>获取更多关于在Rancher Compose中使用负载均衡的例子。</p>
+
+<p>负载均衡由暴露在主机上的端口和负载均衡配置组成，这些配置包括针对不同目标服务的特定端口规则，自定义配置和会话粘性策略。</p>
+
+<p>当与含有<a href="/docs/rancher/v1.6/zh/cattle/adding-services/#sidekick-服务">从容器</a>的服务一起使用的时候，你需要将<a href="/docs/rancher/v1.6/zh/cattle/adding-services/#主服务">主服务</a>作为目标服务，就是那些含有<code class="highlighter-rouge">sidekick</code>标签的服务。</p>
+
+<h3 id="section-11">源端口</h3>
+
+<p>当创建一个负载均衡的时候，你可以将任意一个你想要的端口暴露在主机上。这些端口都可以被用做负载均衡的源端口。如果你想要一个内部的负载均衡，就不要暴露任何端口在负载均衡上，只需要在负载均衡配置中添加端口规则。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> <code class="highlighter-rouge">42</code> 端口 不能被用作负载均衡的源端口，因为它被用于<a href="/docs/rancher/v1.6/zh/cattle/health-checks">健康检查</a>。</p>
+</blockquote>
+
+<h4 id="example-docker-composeyml-1">Example <code class="highlighter-rouge">docker-compose.yml</code></h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy:&lt;version&gt;</span>
+    <span class="c1"># Any ports listed will be exposed on the host that is running the load balancer</span>
+    <span class="c1"># To direct traffic to specific service, a port rule will need to be added.</span>
+    <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">80</span>
+    <span class="pi">-</span> <span class="s">81</span>
+    <span class="pi">-</span> <span class="s">90</span>
+</code></pre>
+</div>
+
+<h3 id="load-balancer-configuration">Load Balancer configuration</h3>
+
+<p>所有负载均衡的配置项都被定义在<code class="highlighter-rouge">rancher-compose.yml</code>的<code class="highlighter-rouge">lb_config</code>字段中</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="c1"># All load balancer options are configured in this key</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web1</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+  <span class="s">web1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">2</span>
+</code></pre>
+</div>
+
+<h4 id="section-12">端口规则</h4>
+
+<p>端口规则是定义在<code class="highlighter-rouge">rancher-compose.yml</code>中的。因为端口规则是单独定义的，会有许多不同的端口指向同一个服务。默认情况下，Rancher将会优先使用那些基于特定的优先级顺序的端口。如果你想要改变这些优先级顺序，你需要设定特定的优先级规则。</p>
+
+<h4 id="section-13">默认优先级顺序</h4>
+
+<ol>
+  <li>没有通配符和URL的主机名</li>
+  <li>没有通配符的主机名</li>
+  <li>有通配符和URL的主机名</li>
+  <li>有通配符的主机名</li>
+  <li>URL</li>
+  <li>默认(没有主机名，没有URL)</li>
+</ol>
+
+<h5 id="section-14">源端口</h5>
+
+<p>源端口是值暴露在主机上的某个端口（也就是定义在<code class="highlighter-rouge">docker-compose.yml</code>中的端口）。</p>
+
+<p>如果你想要创建一个内部负载均衡，那么源端口酒不需要与<code class="highlighter-rouge">docker-compose.yml</code>中定义的任意一个匹配。</p>
+
+<h5 id="section-15">目标端口</h5>
+
+<p>目标端口是服务内部端口。这个端口就是用于启动你容器的镜像所暴露的端口。</p>
+
+<h5 id="section-16">协议</h5>
+
+<p>Rancher的负载均衡支持多种协议类型。</p>
+
+<ul>
+  <li><code class="highlighter-rouge">http</code> - 默认情况下，如果没有设置任何协议，负载均衡就会使用<code class="highlighter-rouge">http</code>。HAProxy 不会对流量做任何解析，仅仅是转发。</li>
+  <li><code class="highlighter-rouge">tcp</code> - HAProxy 不会对流量做任何解析，仅仅是转发。</li>
+  <li><code class="highlighter-rouge">https</code> - 需要设置SSL会话终结。流量将会被HAProxy使用<a href="/docs/rancher/v1.6/zh/environments/certificates/">证书</a>解密，这个证书必须在设定负载均衡之前被添加入Rancher。被流量负载均衡所转发的流量是没有加密的。</li>
+  <li><code class="highlighter-rouge">tls</code> - 需要设置SSL会话终结。流量将会被HAProxy使用<a href="/docs/rancher/v1.6/zh/environments/certificates/">证书</a>解密，这个证书必须在设定负载均衡之前被添加入Rancher。被流量负载均衡所转发的流量是没有加密的。</li>
+  <li><code class="highlighter-rouge">sni</code> - 流量从负载均衡到服务都是被加密的。多个证书将会被提供给负载均衡,这样负载均衡就能将合适的证书基于主机名展示给客户端。 点击<a href="https://en.wikipedia.org/wiki/Server_Name_Indication">服务器名称指示</a>）查看更多详情。</li>
+  <li><code class="highlighter-rouge">udp</code> - Rancher 的HAProxy不支持.</li>
+</ul>
+
+<p>其他的负载均衡驱动可能只支持以上的几种。</p>
+
+<h5 id="section-17">主机名路由</h5>
+
+<p>主机名路由只支持<code class="highlighter-rouge">http</code>, <code class="highlighter-rouge">https</code> 和 <code class="highlighter-rouge">sni</code>，只有<code class="highlighter-rouge">http</code> 和 <code class="highlighter-rouge">https</code>同时支持路径路由。</p>
+
+<h5 id="section-18">服务</h5>
+
+<p>服务名就是你的负载均衡的目标。如果服务在同一个应用下，你可以使用服务名。如果服务在不同的应用下，你需要使用<code class="highlighter-rouge">&lt;应用名&gt;/&lt;服务名&gt;</code>。</p>
+
+<h6 id="example-rancher-composeyml-1">Example <code class="highlighter-rouge">rancher-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">81</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">2368</span>
+        <span class="c1"># Service in the same stack</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">ghost</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="c1"># Target a service in a different stack</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">differentstack/web1</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+  <span class="s">ghost</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">2</span>
+</code></pre>
+</div>
+
+<h5 id="section-19">主机名和路径</h5>
+
+<p>Rancher基于HAProxy的负载均衡支持七层路由，可以在端口规则下通过设定指定的主机头和路径来使用它。</p>
+
+<h6 id="example-rancher-composeyml-2">Example <code class="highlighter-rouge">rancher-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">81</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">2368</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">ghost</span>
+        <span class="s">protocol</span><span class="pi">:</span> <span class="s">http</span>
+        <span class="s">hostname</span><span class="pi">:</span> <span class="s">example.com</span>
+        <span class="s">path</span><span class="pi">:</span> <span class="s">/path/a</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+  <span class="s">ghost</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">2</span>
+</code></pre>
+</div>
+
+<h5 id="section-20">通配符</h5>
+
+<p>当设置基于主机名的路由规则时，Rancher支持通配符。所支持的语法如下。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*.domain.com -&gt; hdr_end(host) -i .domain.com
+domain.com.* -&gt; hdr_beg(host) -i domain.com.
+</code></pre>
+</div>
+
+<h5 id="section-21">优先级</h5>
+
+<p>默认情况下，Rancher 针对同一个服务遵循<a href="#默认优先级顺序">默认优先级顺序</a>，但是你也可以定制化你自己的优先级规则（数字越小，优先级越高）</p>
+
+<h6 id="example-rancher-composeyml-3">Example <code class="highlighter-rouge">rancher-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">88</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">2368</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web1</span>
+        <span class="s">protocol</span><span class="pi">:</span> <span class="s">http</span>
+        <span class="s">hostname</span><span class="pi">:</span> <span class="s">foo.com</span>
+        <span class="s">priority</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web2</span>
+        <span class="s">protocol</span><span class="pi">:</span> <span class="s">http</span>
+        <span class="s">priority</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+  <span class="s">web1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">2</span>
+</code></pre>
+</div>
+
+<h5 id="section-22">选择器</h5>
+
+<p>你可以通过设定<a href="(/docs/rancher/v1.6/zh/cattle/labels/#选择器标签)">选择器</a>来指定多个服务。通过使用选择器，你可以在目标服务上定义服务连接和主机名路由规则，那些标签匹配了选择器的服务将成为负载均衡的目标。</p>
+
+<p>当使用选择器的时候，<code class="highlighter-rouge">lb_config</code>可以设定在负载均衡和任意一个匹配选择器的服务上。</p>
+
+<p>在负载均衡器中。<a href="/docs/rancher/v1.6/zh/cattle/labels/#选择器标签">选择器标签</a> 设置在<code class="highlighter-rouge">selector</code>下的<code class="highlighter-rouge">lb_config</code>中。负载均衡的<code class="highlighter-rouge">lb_config</code>端口规则不能有服务，并且也不能有目标端口。目标端口是设置在目标服务的端口规则中的。如果你需要使用主机名路由，主机名和路径是设置在目标服务下的。</p>
+
+<blockquote>
+  <p><strong>注意:</strong> 对于那些在v1版本yaml中使用了的选择器标签字段的负载均衡，这不会被转化成v2版本的负载均衡。因为服务上的端口规则不会更新。</p>
+</blockquote>
+
+<h6 id="example-docker-composeyml-2">Example <code class="highlighter-rouge">docker-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy:&lt;version&gt;</span>
+    <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">81</span>
+  <span class="c1"># These services (web1 and web2) will be picked up by the load balancer as a target</span>
+  <span class="s">web1</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="s">labels</span><span class="pi">:</span>
+      <span class="s">foo</span><span class="pi">:</span> <span class="s">bar</span>
+  <span class="s">web2</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="s">labels</span><span class="pi">:</span>
+      <span class="s">foo</span><span class="pi">:</span> <span class="s">bar</span>
+</code></pre>
+</div>
+
+<h6 id="example-rancher-composeyml-4">Example <code class="highlighter-rouge">rancher-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">81</span>
+        <span class="c1"># Target any service that has foo=bar as a label</span>
+        <span class="s">selector</span><span class="pi">:</span> <span class="s">foo=bar</span>
+        <span class="s">protocol</span><span class="pi">:</span> <span class="s">http</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+  <span class="c1"># web1 and web2 are targeted with the same source port but with the different hostname and path rules</span>
+  <span class="s">web1</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">hostname</span><span class="pi">:</span> <span class="s">test.com</span>
+  <span class="s">web2</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">hostname</span><span class="pi">:</span> <span class="s">example.com/test</span>
+</code></pre>
+</div>
+
+<h5 id="section-23">后台名称</h5>
+
+<p>如果你想要清晰地在负载均衡配置中标明你的后台，你需要使用<code class="highlighter-rouge">backend_name</code>。如果你想要为一个某个后台自定义配置参数，这就会用得上。</p>
+
+<h4 id="section-24">证书</h4>
+
+<p>如果你需要使用<code class="highlighter-rouge">https</code> 或者 <code class="highlighter-rouge">tls</code> <a href="#协议">协议</a>, 你可以使用<a href="/docs/rancher/v1.6/zh/environments/certificates">直接加入Rancher</a>或者挂载在负载均衡容器中的证书。</p>
+
+<h5 id="rancher">引用在Rancher中添加的证书</h5>
+
+<p>证书可以在负载均衡容器的<code class="highlighter-rouge">lb_config</code>中被引用。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">certs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">&lt;certName&gt;</span>
+      <span class="s">default_cert</span><span class="pi">:</span> <span class="s">&lt;defaultCertName&gt;</span>
+</code></pre>
+</div>
+
+<h5 id="section-25">将证书挂载进负载均衡容器</h5>
+
+<p><em>仅仅在Compose文件中支持</em></p>
+
+<p>证书可以作为卷直接挂载进负载均衡容器。证书需要按照特定的目录结构挂载入容器。如果你使用LetsEncrypt客户端生存证书，那么它就已经满足Rancher的要求。否则，你需要手动设置目录结构，使他与LetsEncrypt客户端生成的一致。</p>
+
+<p>Rancher的负载均衡将会检测证书目录来实现更新。任何对证书的新增／删除操作都将每30秒同步一次。</p>
+
+<p>所以的证书都位于同一个基础的证书目录下。这个文件名将会作为负载均衡服务的一个标签，用于通知负载均衡证书的所在地。</p>
+
+<p>在这个基础目录下，相同域名的证书被放置在同一个子目录下。文件名就是证书的域名。并且每一个文件夹都需要包含<code class="highlighter-rouge">privkey.pem</code>和<br />
+<code class="highlighter-rouge">fullchain.pem</code>。对于默认证书，可以被放置在任意一个子目录名下，但是下面的文件命名规则必须保持一致。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-- certs
+  |-- foo.com
+  |   |-- privkey.pem
+  |   |-- fullchain.pem
+  |-- bar.com
+  |   |-- privkey.pem
+  |   |-- fullchain.pem
+  |-- default_cert_dir_optional
+  |   |-- privkey.pem
+  |   |-- fullchain.pem
+...
+</code></pre>
+</div>
+<p>当启动一个负载均衡的时候，你必须用标签声明证书的路径（包括默认证书的路径）。这样以来，负载均衡将忽略设置在<code class="highlighter-rouge">lb_config</code>中的证书。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 你不能同时使用在Rancher中添加的证书和挂载在负载均衡容器中的证书</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">labels</span><span class="pi">:</span>
+  <span class="s">io.rancher.lb_service.cert_dir</span><span class="pi">:</span> <span class="s">&lt;CERTIFICATE_LOCATION&gt;</span>
+  <span class="s">io.rancher.lb_service.default_cert_dir</span><span class="pi">:</span> <span class="s">&lt;DEFAULT_CERTIFICATE_LOCATION&gt;</span>
+</code></pre>
+</div>
+
+<p>证书可以通过绑定主机的挂载目录或者通过命名卷来挂在入负载均衡容器，命名卷可以以我们的<a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/">storage drivers</a>为驱动。</p>
+
+<h6 id="example-docker-composeyml-3">Example <code class="highlighter-rouge">docker-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy:&lt;TAG_BASED_ON_RELEASE&gt;</span>
+    <span class="s">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">/location/on/hosts:/certs</span>
+    <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">8087:8087/tcp</span>
+    <span class="s">labels</span><span class="pi">:</span>
+      <span class="s">io.rancher.container.agent.role</span><span class="pi">:</span> <span class="s">environmentAdmin</span>
+      <span class="s">io.rancher.container.create_agent</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+      <span class="s">io.rancher.lb_service.cert_dir</span><span class="pi">:</span> <span class="s">/certs</span>
+      <span class="s">io.rancher.lb_service.default_cert_dir</span><span class="pi">:</span> <span class="s">/certs/default.com</span>
+  <span class="s">myapp</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">nginx:latest</span>
+    <span class="s">stdin_open</span><span class="pi">:</span> <span class="s">true</span>
+    <span class="s">tty</span><span class="pi">:</span> <span class="s">true</span>
+</code></pre>
+</div>
+
+<h6 id="example-rancher-composeyml-5">Example <code class="highlighter-rouge">rancher-compose.yml</code></h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">start_on_create</span><span class="pi">:</span> <span class="s">true</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">certs</span><span class="pi">:</span> <span class="pi">[]</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">priority</span><span class="pi">:</span> <span class="s">1</span>
+        <span class="s">protocol</span><span class="pi">:</span> <span class="s">https</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">myapp</span>
+        <span class="s">source_port</span><span class="pi">:</span> <span class="s">8087</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">strategy</span><span class="pi">:</span> <span class="s">recreate</span>
+  <span class="s">myapp</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">start_on_create</span><span class="pi">:</span> <span class="s">true</span>
+</code></pre>
+</div>
+
+<h4 id="section-26">自定义配置</h4>
+
+<p>高阶用户可以在<code class="highlighter-rouge">rancher-compose.yml</code>中声明自定义的配置。点击<a href="http://cbonte.github.io/haproxy-dconv/configuration-1.5.html">HAProxy配置文档</a>查看更多详情。</p>
+
+<h5 id="example-rancher-composeyml-6">Example <code class="highlighter-rouge">rancher-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">config</span><span class="pi">:</span> <span class="pi">|-</span>
+        <span class="no">global</span>
+            <span class="no">maxconn 4096</span>
+            <span class="no">maxpipes 1024</span>
+
+        <span class="no">defaults</span>
+            <span class="no">log global</span>
+            <span class="no">mode    tcp</span>
+            <span class="no">option  tcplog</span>
+
+        <span class="no">frontend 80</span>
+            <span class="no">balance leastconn</span>
+
+        <span class="no">frontend 90</span>
+            <span class="no">balance roundrobin</span>
+
+        <span class="no">backend mystack_foo</span>
+            <span class="no">cookie my_cookie insert indirect nocache postonly</span>
+            <span class="no">server $$IP &lt;server parameters&gt;</span>
+
+        <span class="no">backend customUUID</span>
+  <span class="s">health_check</span><span class="pi">:</span>
+    <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+    <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+    <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+    <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+    <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+</code></pre>
+</div>
+
+<h4 id="section-27">会话粘性策略</h4>
+
+<p>如果你需要使用会话粘性策略，你可以更新<code class="highlighter-rouge">rancher-compose.yml</code>中的策略。</p>
+
+<h5 id="example-rancher-composeyml-7">Example <code class="highlighter-rouge">rancher-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">stickiness_policy</span><span class="pi">:</span>
+        <span class="s">name</span><span class="pi">:</span> <span class="s">&lt;policyName&gt;</span>
+        <span class="s">cookie</span><span class="pi">:</span> <span class="s">&lt;cookieInfo&gt;</span>
+        <span class="s">domain</span><span class="pi">:</span> <span class="s">&lt;domainName&gt;</span>
+        <span class="s">indirect</span><span class="pi">:</span> <span class="s">false</span>
+        <span class="s">nocache</span><span class="pi">:</span> <span class="s">false</span>
+        <span class="s">postonly</span><span class="pi">:</span> <span class="s">false</span>
+        <span class="s">mode</span><span class="pi">:</span> <span class="s">&lt;mode&gt;</span>
+  <span class="s">health_check</span><span class="pi">:</span>
+    <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+    <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+    <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+    <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+    <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+</code></pre>
+</div>
+
+<h3 id="rancher-compose-examples">Rancher Compose Examples</h3>
+
+<h4 id="load-balancer-example-l7">Load Balancer Example (L7)</h4>
+
+<h5 id="example-docker-composeyml-4">Example <code class="highlighter-rouge">docker-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">web</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy</span>
+  <span class="s">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">80</span>
+  <span class="pi">-</span> <span class="s">82</span>
+</code></pre>
+</div>
+
+<h5 id="example-rancher-composeyml-8">Example <code class="highlighter-rouge">rancher-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web1</span>
+        <span class="s">hostname</span><span class="pi">:</span> <span class="s">app.example.com</span>
+        <span class="s">path</span><span class="pi">:</span> <span class="s">/foo</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">82</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">8081</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web2</span>
+        <span class="s">hostname</span><span class="pi">:</span> <span class="s">app.example.com</span>
+        <span class="s">path</span><span class="pi">:</span> <span class="s">/foo/bar</span>
+  <span class="s">health_check</span><span class="pi">:</span>
+    <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+    <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+    <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+    <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+    <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+</code></pre>
+</div>
+
+<h4 id="section-28">内部负载均衡例子</h4>
+
+<p>设置内部负载均衡不需要列举端口，但是你仍然可以设置端口规则来转发流量。</p>
+
+<h5 id="example-docker-composeyml-5">Example <code class="highlighter-rouge">docker-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy</span>
+  <span class="s">web</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+</code></pre>
+</div>
+
+<p><br /></p>
+
+<h5 id="example--rancher-composeyml">Example  <code class="highlighter-rouge">rancher-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web</span>
+    <span class="s">health_check</span><span class="pi">:</span>
+      <span class="s">port</span><span class="pi">:</span> <span class="s">42</span>
+      <span class="s">interval</span><span class="pi">:</span> <span class="s">2000</span>
+      <span class="s">unhealthy_threshold</span><span class="pi">:</span> <span class="s">3</span>
+      <span class="s">healthy_threshold</span><span class="pi">:</span> <span class="s">2</span>
+      <span class="s">response_timeout</span><span class="pi">:</span> <span class="s">2000</span>
+  <span class="s">web</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+</code></pre>
+</div>
+
+<h4 id="ssl-example">SSL会话终止 Example</h4>
+
+<p>在<code class="highlighter-rouge">rancher-compose.yml</code>中使用的证书必须被加入到Rancher中。</p>
+
+<h5 id="example-docker-composeyml-6">Example <code class="highlighter-rouge">docker-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">rancher/lb-service-haproxy</span>
+    <span class="s">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">443</span>
+  <span class="s">web</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+</code></pre>
+</div>
+
+<p><br /></p>
+
+<h5 id="example-rancher-composeyml-9">Example <code class="highlighter-rouge">rancher-compose.yml</code></h5>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">lb</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="s">lb_config</span><span class="pi">:</span>
+      <span class="s">certs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">&lt;certName&gt;</span>
+      <span class="s">default_cert</span><span class="pi">:</span> <span class="s">&lt;defaultCertName&gt;</span>
+      <span class="s">port_rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">source_port</span><span class="pi">:</span> <span class="s">443</span>
+        <span class="s">target_port</span><span class="pi">:</span> <span class="s">443</span>
+        <span class="s">service</span><span class="pi">:</span> <span class="s">web</span>
+        <span class="s">protocol</span><span class="pi">:</span> <span class="s">https</span>
+  <span class="s">web</span><span class="pi">:</span>
+    <span class="s">scale</span><span class="pi">:</span> <span class="s">1</span>
+</code></pre>
+</div>
+
+    </div>
+</div>
+</div>
+</div>
+
+<div class="row wrap">
+<a class="btn btn-primary pull-right" href="https://github.com/rancher/rancher.github.io/tree/master/rancher/latest/zh/cattle/adding-load-balancers/index.md">Edit this page <i class="fa fa-pencil"></i></a>
+</div>
+
+<footer class="clearfix">
+  <div class="wrap">
+    <div class=""><!--bottom footer-->
+      <div class="row">
+          <div class="col span-6">
+              <ul id="menu-footer" class="list-inline">
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="About Rancher Labs" href="http://rancher.com/about/">About Rancher Labs</a></li>
+                  <li id="menu-item-11352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11352"><a title="Contact" href="http://rancher.com/contact/">Contact</a></li>
+                  <li id="menu-item-14152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14152"><a title="Privacy" href="http://rancher.com/privacy/">Privacy</a></li>
+                  <li id="menu-item-15635" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15635"><a title="Careers" href="http://rancher.com/careers/">Careers</a></li>
+                  
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="English Docs" href="https://rancher.com/docs/rancher/latest/en/">English Docs</a></li>
+                  
+              </ul>
+              <p>Copyright &copy; 2014-2017 <a href="http://rancher.com">Rancher Labs</a>. All Rights Reserved.</p>
+          </div>
+          <div class="col span-6 text-right">
+              <ul class="list-inline">
+                  <li><a href="https://github.com/rancher/rancher" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-github.png" alt="Rancher Labs GitHub"></a></li>
+                  <li><a href="https://twitter.com/Rancher_Labs" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-twitter.png" alt="Rancher Labs Twitter"></a></li>
+                  <li><a href="https://slack.rancher.io/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-slack.png" alt="Rancher Labs Slack"></a></li>
+                  <li><a href="https://www.linkedin.com/groups/6977008/profile" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-linkedin.png" alt="Rancher Labs LinkedIn"></a></li>
+                  <li><a href="https://www.facebook.com/rancherlabs/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-fb.png" alt="Rancher Labs Facebook"></a></li>
+              </ul>
+          </div>
+      </div>
+    </div><!--bottom footer-->
+    </div>
+</footer>
+<script src="/docs/vendor/jquery.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/jquery.slicknav.min.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/rancher-docs.js?t=2017-12-04 13:23:19 -0800"></script>
+<!-- Start of Google Analytics -->
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-56382716-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End of Google Analytics -->
+<!-- Start of Async HubSpot Analytics Code -->
+<script type="text/javascript">
+(function(d, s, i, r) {
+    if (d.getElementById(i)) { return; }
+    var n = d.createElement(s),
+        e = d.getElementsByTagName(s)[0];
+    n.id = i;
+    n.src = '//js.hs-analytics.net/analytics/' + (Math.ceil(new Date() / r) * r) + '/468859.js';
+    e.parentNode.insertBefore(n, e);
+})(document, "script", "hs-analytics", 300000);
+</script>
+<!-- End of Async HubSpot Analytics Code -->
+</body>
+
+</html>
+

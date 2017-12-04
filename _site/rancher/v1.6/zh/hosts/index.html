@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hosts in Rancher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation for Rancher">
+    <link href="/docs/favicon.png" rel="shortcut icon" type="image/png" sizes="16x16">
+    <link href="/docs/css/syntax.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/font-awesome/css/font-awesome.min.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/lato/lato.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/lacsso.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/slicknav.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/rancher-docs.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+</head>
+
+<body class="bg-default">
+    <div class="row body">
+    <header class="page-header">
+      <div class="wrap clearfix">
+        <nav role="navigation" id="js-responsive-nav" class="clearfix responsive-nav"><a class="nav-toggle"></a>
+          <a class="nav-logo logo-caas btn bg-transparent"><img src="/docs/img/rancher-logo-nopadding.svg" class="img-responsive" alt="Rancher" data-pin-nopin="true"></a>
+          <ul class="nav-main nav-list">
+            <li><a href="http://rancher.com/">Back to Rancher.com</a></li>
+
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="https://github.com/rancher/rancher#installation" id="rnchrdm-nav-download" title="Download Rancher" target="_blank"><img src="/docs/img/header-download.svg" alt="Download Rancher" height="12" width="14"> Download Rancher</a></li>
+              <li><a href="http://rancher.com/support" id="rnchrdm-nav-reqsupport" title="Request Support"><i class="fa fa-question-circle" aria-hidden="true"></i>
+ Request Support</a></li>
+            </ul>
+          </ul>
+      </nav>
+    </div>
+    <h1>Rancher Docs</h1>
+  </header>
+  <div class="clearfix"></div>
+  <div class="wrap clearfix">
+        <div class="col span-3 mt-0 mr-0 sidebar">
+        <!--Start Google Search-->
+              <div class="gcse-search" id="google-search"></div>
+              <script>
+              var match = window.location.pathname.match(/\/rancher\/([^\/]+)/);
+              if (match) {
+                  document.getElementById('google-search').setAttribute('data-defaultToRefinement', match[1]);
+              }
+
+              (function() {
+                  var cx = '007896692384436596364:60akf3bfmxm';
+                  var gcse = document.createElement('script');
+                  gcse.type = 'text/javascript';
+                  gcse.async = true;
+                  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(gcse, s);
+              })();
+              </script>
+              <!--End Google Search-->
+
+<ul id="menu">
+    <li><a href="/docs/rancher/v1.6/zh/">简介</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/quick-start-guide/">快速开始</a></li>
+    <li>
+        <a href="#">安装Rancher<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/">安装 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#安装需求">安装需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#rancher-server-标签">Rancher Server标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署-non-ha">启动 Rancher Server - 单容器部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---多节点的ha部署">启动 Rancher Server - 多节点的HA部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#ha部署需求">HA部署需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---使用外部数据库">启动 Rancher Server - 单容器部署 - 使用外部数据库</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---挂载mysql数据库的数据目录">启动 Rancher Server - 单容器部署 - 挂载MYSQL数据库的数据目录</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#使用aws的elasticclassic-load-balancer作为rancher-server-ha的负载均衡器">使用AWS的ELB作为HA的负载均衡器</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#tls认证使用adopenldap">使用TLS认证的AD/OPENLDAP</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#在http代理后方启动-rancher-server">在HTTP代理后启动 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/selinux/">在SELinux模式下使用Rancher</a></li>
+          <li>
+               <a href="#">安装Rancher并使用SSL<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#需求">需求</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#nginx-配置模版">NGINX配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#apache-配置例子">Apache配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#haproxy-配置例子">HAProxy配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用aws的elastic-load-balancer作为rancher-server-ha的负载均衡器并使用ssl">使用AWS的ELB作为HA的负载均衡器并使用SSL</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#f5-big-ip配置示例">F5 BIG-IP配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用自签名证书-beta">使用自签名证书</a></li>
+               </ul>
+          </li>
+          <li>
+               <a href="#">内网启动Rancher<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用私有镜像仓库">使用私有镜像仓库</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用http代理">使用HTTP代理</a></li>
+               </ul>
+          </li>
+        </ul>
+    </li>
+    <li>
+         <a href="#">升级Rancher Server<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/">升级Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#rancher-server-tags">Rancher Server标签</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#基础设施服务]">升级基础设施服务</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#升级ha架构">升级HA架构的Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---外部数据库">升级非HA模式的Rancher Server - 外部数据库</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---绑定挂载的mysql卷">升级非HA模式的Rancher Server - 绑定挂载的MYSQL卷</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#没有互联网访问的rancher服务器">升级内网中的Rancher Server</a></li>
+        </ul>
+     </li>
+    <li>
+         <a href="#">系统设置<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li>
+                <a href="#">访问控制方式<i class="pull-right fa fa-angle-down"></i></a>
+                <ul>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#活动目录">Active Directory</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#azure-ad">Azure AD</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#github">Github</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#本地身份认证">本地身份认证</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#openldap">OpenLDAP</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#shibboleth">Shibboleth</a></li>
+                </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#访问控制">访问控制</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#限制并发登陆">限制并发登陆</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/accounts/">账户</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#主机注册">注册主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#应用商店">应用商店</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/machine-drivers/">主机驱动</a></li>
+        </ul>
+    </li>
+    <li>
+          <a href="#">环境<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+            <li><a href="/docs/rancher/v1.6/zh/environments/">环境管理</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#什么是环境模版">环境模版</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#成员角色">环境中的角色</a></li>
+          </ul>
+    </li>
+    <li>
+        <a href="#">主机<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/">主机简介</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#docker版本适用对比">支持的Docker版本</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机标签">主机标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机调度地址">主机调度地址</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在代理后的主机">在代理后的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/custom/">添加自定义主机</a></li>
+          <li>
+              <a href="#">添加云主机<i class="pull-right fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/amazon/">添加Amazon EC2主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/azure/">添加Azure主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/digitalocean/">添加DigitalOcean主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/exoscale/">添加Exoscale主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/packet/">添加Packet主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/rackspace/">添加Rackspace主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/other/">添加其他云服务商的主机</a></li>
+              </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#访问云提供商的主机">访问云提供商的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在rancher内删除主机">删除主机</a></li>
+        </ul>
+    </li>
+    <li>
+      <a href="#">镜像仓库<i class="pull-right fa fa-angle-down"></i></a>
+      <ul>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/">镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#不安全的镜像库">不安全的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#自签名证书">自签名证书</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用亚马逊的ecr镜像库">使用亚马逊的ECR镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用google容器镜像仓库">使用Google容器镜像仓库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#更改默认的镜像库">更改默认的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#限制镜像库的使用">限制镜像库的使用</a></li>
+      </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/environments/certificates/">证书</a></li>
+    <li>
+      <a href="#">系统服务<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/">基础设施服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/networking/">网络</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/network-policy/">网络策略</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/load-balancer">负载均衡器</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/dns-service/">DNS服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/metadata-service/">Metadata服务</a></li>
+              <li>
+                  <a href="#">存储服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/">存储服务</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-nfs/">Rancher NFS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-ebs/">Rancher EBS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/">调度器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#多ip主机调度">多IP主机调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#基于资源约束的调度">基于资源约束的调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#在主机上调度指定服务">在主机上调度指定服务</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/audit-log/">审计日志</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/service-accounts/">服务账号</a></li>
+           </ul>
+    </li>
+    <li>
+          <a href="#">Cattle<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/stacks/">应用</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-services/">服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/volumes/">卷</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/">负载均衡</a></li>
+                <li>
+                    <a href="#">在UI中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#如何在ui上新增一个负载均衡">添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#服务规则">服务规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#选择器规则">选择器规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止">SSL会话终止</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#负载均衡的会话粘性">负载均衡的会话粘性</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义haproxycfg">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#标签调度负载均衡">标签调度负载均衡</a></li>
+                      </ul>
+                </li>
+                <li>
+                    <a href="#">在CLI和Compose中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#用rancher-compose-添加负载均衡">用Rancher Compose 添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#源端口">源端口</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#端口规则">端口规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#证书">证书</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义配置">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#会话粘性策略">会话粘性策略</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#load-balancer-example-l7">七层负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#内部负载均衡例子">内部负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止-example">SSL会话终止示例</a></li>
+                      </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-external-services/">外部服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-service-alias/">服务别名</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/health-checks/">健康检查</a></li>
+                <li>
+                    <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/">调度</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在ui中添加标签">在UI中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在rancher-compose中添加标签">在Rancher Compose中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#调度标签表">调度标签表</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/upgrading/">升级服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/internal-dns-service/">Cattle环境中的内部DNS服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/external-dns-service/">外部DNS服务</a></li>
+                <li>
+                    <a href="#">Rancher-Compose<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/">Rancher Compose</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/commands/">指令与参数</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/environment-interpolation/">环境插值</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/build/">使用AWS S3构建镜像</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/secrets/">密文 - 实验性的</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/webhook-service/">Webhooks</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/labels/">标签</a></li>
+          </ul>
+    </li>
+    <li>
+          <a href="#">Kubernetes<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/">启动Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/resiliency-planes/">弹性平面</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/providers/">Cloud Providers</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/private-registry/">私有镜像仓库</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/rbac/">RBAC</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/disaster-recovery/">灾难恢复</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/backups/">备份</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/storage/">持久化存储</a></li>
+              <li>
+                  <a href="#">插件支持<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/">插件支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#helm">Helm</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#skydns">SkyDNS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">Ingress支持与配置<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/">Ingress支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#基于主机路由配置-ingress-资源">基于主机路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#使用基于路径的路由配置ingress资源">使用基于路径的路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例两个负载均衡器使用交替的端口">多个负载均衡器使用不同的端口</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例使用tls">使用 TLS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#禁用http">禁用HTTP</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例用户定制">示例用户定制</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在所有主机上运行负载均衡器">所有主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在特定主机上运行负载均衡器">特定主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#例将流量导向同一主机上的不同容器">将流量导向同一主机上的不同容器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在同一主机上对容器的流量进行优先级排序">在同一主机上对容器的流量进行优先级排序</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/upgrading/">升级Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/deleting/">删除Kubernetes</a></li>
+
+          </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/mesos/">Mesos</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/swarm/">Swarm - 实验性的 </a></li>
+    <li><a href="/docs/rancher/v1.6/zh/windows/">Windows - 实验性的</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/native-docker/">以原生Docker命令行的形式使用Rancher</a></li>
+    <li>
+            <a href="#">应用商店<i class="pull-right fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/">应用商店</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/private-catalog/">创建私有应用商店</a></li>
+            </ul>
+        </li>
+    <li><a href="#">Rancher命令行<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/cli/">Rancher命令行</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/commands/">命令和选项</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/variable-interpolation/">变量替换</a></li>
+        </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/en/api/v2-beta/">API文档</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/contributing/">Rancher社区贡献</a></li>
+    <li>
+        <a href="#">常见问题<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/server/">Rancher Server的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/agents/">Rancher Agent的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/troubleshooting/">常见的故障排查与修复方法</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="btn-docs">历史文档<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.5/zh/">Rancher v1.5</a></li>
+            <li><a href="/docs/rancher/v1.4/zh/">Rancher v1.4</a></li>
+            <li><a href="/docs/rancher/v1.3/zh/">Rancher v1.3</a></li>
+            <li><a href="/docs/rancher/v1.2/zh/">Rancher v1.2</a></li>
+            <li><a href="/docs/rancher/v1.1/zh/">Rancher v1.1</a></li>
+            <li><a href="/docs/rancher/v1.0/en/">Rancher v1.0</a></li>
+        </ul>
+    </li>
+</ul>
+
+</div>
+<div class="col span-9">
+    <div class="content-container">
+        <h2 id="section">入门指南</h2>
+<hr />
+
+<p>在Rancher中，主机是调度资源的基本单位（直观的理解就是所发生的操作最终都会落到某台主机上），它可以是虚拟的或者物理的Linux服务器。Rancher管理的主机需要满足以下的条件：</p>
+
+<ul>
+  <li>任何可以运行<a href="#docker版本适用对比">支持的Docker版本</a>的 Linux 发行版本，例如：<a href="http://docs.rancher.com/os/">RancherOS</a>，Ubuntu，RHEL/CentOS 7。不过针对RHEL/CentOS系列，有些需要注意的地方：
+    <ul>
+      <li>Docker 并不推荐使用 RHEL/CentOS 默认的存储驱动（devicemapper），可以参考<a href="https://docs.docker.com/engine/reference/commandline/dockerd/#/storage-driver-options">这篇文档</a>来修改。</li>
+      <li>如果启用 SELinux，<a href="/docs/rancher/v1.6/zh/installing-rancher/selinux/">需要安装额外的模块</a>。</li>
+      <li>内核版本要求是 <code class="highlighter-rouge">3.10.0-514.2.2.el7.x86_64</code> 及以上，建议使用 RHEL/CentOS 7.3 或者更高的发行版本。</li>
+    </ul>
+  </li>
+  <li>1GB的内存。</li>
+  <li>推荐 w/AES-NI 架构的 CPU。</li>
+  <li>主机可以通过HTTP或HTTPS来访问Rancher Server服务，默认端口是8080。</li>
+  <li>主机与主机之间是可以相互访问的，从而确保容器之间的跨主机通信。</li>
+</ul>
+
+<p>另外，Rancher也可以管理由Docker Machine驱动的主机，只要这些主机满足上面的条件即可。</p>
+
+<p>在Rancher的操作界面上，选择 <strong>基础架构</strong>-&gt;<strong>主机</strong>，点击 <strong>添加主机</strong>按钮，然后再做些工作，就可以让 Rancher 管理到这台新主机了。</p>
+
+<h3 id="docker">Docker版本适用对比</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>版本</th>
+      <th>Rancher适用？</th>
+      <th>K8S适用？</th>
+      <th>安装脚本</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">1.9.x</code> 和更低的版本</td>
+      <td>No</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">1.10.0</code> - <code class="highlighter-rouge">1.10.2</code></td>
+      <td>No</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">1.10.3</code> (和更高的版本)</td>
+      <td>No<p>(Yes v1.6.5以及更低版本中)</p></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/1.10.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">1.11.x</code></td>
+      <td>No</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/1.11.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">1.12.0</code> - <code class="highlighter-rouge">1.12.2</code></td>
+      <td>No</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">1.12.3</code> (和更高的版本)</td>
+      <td><strong>Yes</strong></td>
+      <td><strong>Yes</strong></td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/1.12.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">1.13.x</code></td>
+      <td><strong>Yes</strong></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/1.13.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">17.03.x-ce</code></td>
+      <td><strong>Yes</strong></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/17.03.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">17.03.x-ee</code></td>
+      <td><strong>Yes</strong></td>
+      <td>No</td>
+      <td>n/a</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">17.04.x-ce</code></td>
+      <td>No</td>
+      <td> </td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/17.04.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">17.05.x-ce</code></td>
+      <td>No</td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/17.05.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">17.06.x-ce</code></td>
+      <td><strong>Yes</strong><p>(v1.6.3以及更高版本)</p></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">curl https://releases.rancher.com/install-docker/17.06.sh | sh</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">17.06.x-ee</code></td>
+      <td><strong>Yes</strong><p>(v1.6.3以及更高版本)</p></td>
+      <td>No</td>
+      <td>n/a</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>注意：</strong> 我们不会支持Docker的edge版本，但是我们会支持Docker的稳定版本。</p>
+</blockquote>
+
+<h3 id="docker-1">安装特定版本的Docker</h3>
+
+<p>一般会使用 <code class="highlighter-rouge">curl https://get.docker.com | sh</code> 脚本来安装最新版的 Docker 。但是，最新版的 Dokcer 有可能不适用于正准备安装或已经在使用中的 Rancher 版本。因此，一种推荐的做法是：安装特定版本的 Docker。按照上方的对比表，选择 Rancher 适用的安装脚本执行即可。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 如果从操作界面上添加云主机，可以通过 <strong>高级选项</strong> 里面的 <strong>Docker Install URL</strong>来选择需要安装的 Docker 版本。</p>
+</blockquote>
+
+<h3 id="section-1">主机是如何工作的？</h3>
+
+<p>Rancher Agent容器在主机上启动成功之后，这台主机就连接到了Rancher Server上。在<strong>添加主机</strong>-&gt;<strong>Custom（自定义）</strong>界面中的很长的URL就是主机注册口令。这个注册口令在主机第一次连接Rancher Server的时候会被用到。在注册的过程中，Rancher Server会生成一个Agent账号和一个API密钥。之后Agent与Server直接的全部通信都要使用这个密钥，它们之间的认证逻辑和其他的API密钥认证逻辑是一样的。</p>
+
+<p>从设计的角度而言，Rancher Agent是运行在独立于Rancher Server的主机上，所以Rancher Agent本身是不可信的。采用接口访问密钥的机制，可以确保Rancher Agent只访问被授权的接口，而Rancher Server只响应可信的请求。但是目前是单向认证，只认证从Rancher Agent到Rancher Server的请求，并没有认证从Rancher Server到Rancher Agent的响应。因此，用户可以根据需要，使用TLS和证书来做校验。</p>
+
+<p>每个<a href="/docs/rancher/v1.6/zh/environments/">环境</a>的注册口令，都是由Rancher Server生成并保存到数据库，然后和API密钥一起下发给Rancher Agent使用。Rancher Agent和Rancher Server之间是采用AES对称加密的点对点通讯。</p>
+
+<p><a id="addhost"></a></p>
+
+<h3 id="section-2">添加主机</h3>
+
+<p>第一次添加主机时，Rancher Server会要求配置<a href="/docs/rancher/v1.6/zh/configuration/settings/##主机注册">主机注册地址</a>。这个地址可以是域名或者IP地址（如果80端口不可访问，还需要加上可访问的端口号，默认 <code class="highlighter-rouge">8080</code>），能够访问Rancher接口即可。任何时候都可以改变 <a href="/docs/rancher/v1.6/zh/configuration/settings/#主机注册">主机注册地址</a>，相关操作可以查看 <strong>系统管理</strong> 下的 <strong>系统设置</strong>。设置好主机注册地址后，点击 <strong>保存</strong>.</p>
+
+<p>Rancher支持添加云提供商（例如AWS，DigitalOcean，阿里云，vSphere等）所提供的主机或者本地（例如VirtualBox，VMWare等）设置好的主机。对于云提供商，Rancher可以通过<code class="highlighter-rouge">docker-machine</code>来添加的，所以本质上实现了 Docker Machine 驱动的厂商的云主机，都可以被添加。</p>
+
+<p>接下来，选择:</p>
+
+<ul>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/custom/">添加自定义主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/amazon/">添加 AWS EC2 主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/azure/">添加 Azure 主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/digitalocean/">添加 DigitalOcean 主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/exoscale/">添加 Exoscale 主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/packet/">添加 Packet 主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/rackspace/">添加 Rackspace 主机</a></li>
+  <li><a href="/docs/rancher/v1.6/zh/hosts/other/">添加其他云提供商的主机</a></li>
+</ul>
+
+<p>当主机被添加到Rancher时，这台主机会运行一个合适版本的<code class="highlighter-rouge">rancher/agent</code>容器。</p>
+
+<p><a id="labels"></a></p>
+
+<h3 id="section-3">主机标签</h3>
+
+<p>在Rancher中，可以通过添加标签的方式来管理某台主机，做法就是在 <code class="highlighter-rouge">rancher/agnet</code> 容器启动的时候，以环境变量的方法把标签加进去。在操作界面上可以看到，标签其实是一些键不可以重复的键值对。值得注意的是，如果有两个相同的键但是值不一样，那么最后添加的值将会被Rancher使用。</p>
+
+<p>给主机增加标签后，你可以根据需求来<a href="/docs/rancher/v1.6/zh/cattle/scheduling/">调度服务／负载均衡</a>。如果不希望某个服务运行在某台主机上或者要求某个服务必须运行在某台主机上，可以在<a href="/docs/rancher/v1.6/zh/cattle/adding-services/">添加服务</a>时通过主机标签来进行配置。</p>
+
+<p>在你需要使用<a href="/docs/rancher/v1.6/zh/cattle/external-dns-service/">外部DNS服务（类似 Bind9 这类）</a>或者<a href="/docs/rancher/v1.6/zh/cattle/external-dns-service/#为外部dns使用特定的ip">通过程序来控制DNS记录</a>的时候，如果所需的IP不是主机IP的话，那就要在运行 <code class="highlighter-rouge">rancher/agent</code> 时增加标签 <code class="highlighter-rouge">io.rancher.host.external_dns_ip=&lt;IP_TO_BE_USED_FOR_EXTERNAL_DNS&gt;</code>。切记，当要某个容器服务要使用外部DNS服务时，一定要增加这个标签。</p>
+
+<p>通过UI添加云提供商的主机时，你可以在UI上添加主机标签，<code class="highlighter-rouge">rancher/agent</code> 会保证这些标签都会自动添加到主机上。</p>
+
+<p>如果通过UI添加自定义主机，当增加标签时，UI上的运行注册脚本会增加对应的环境变量：<code class="highlighter-rouge">CATTLE_HOST_LABELS</code>。比如，增加一个标签：foo=bar，会出现下面的效果：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$  </span>sudo docker run -e <span class="nv">CATTLE_HOST_LABELS</span><span class="o">=</span><span class="s1">'foo=bar'</span> -d --privileged <span class="se">\</span>
+    -v /var/run/docker.sock:/var/run/docker.sock rancher/agent:v0.8.2 <span class="se">\</span>
+    http://&lt;rancher-server-ip&gt;:8080/v1/projects/1a5/scripts/&lt;registrationToken&gt;
+
+<span class="c"># 当再增加一个标签：hello=world</span>
+<span class="gp">$  </span>sudo docker run -e <span class="nv">CATTLE_HOST_LABELS</span><span class="o">=</span><span class="s1">'foo=bar&amp;hello=world'</span> -d --privileged <span class="se">\</span>
+    -v /var/run/docker.sock:/var/run/docker.sock rancher/agent:v0.8.2 <span class="se">\</span>
+    http://&lt;rancher-server-ip&gt;:8080/v1/projects/1a5/scripts/&lt;registrationToken&gt;
+</code></pre>
+</div>
+
+<p><br /></p>
+
+<blockquote>
+  <p><strong>注意：</strong> <code class="highlighter-rouge">rancher/agent</code> 的版本与 <code class="highlighter-rouge">rancher/server</code> 的版本是相关的，执行添加自定义主机的时候，需要注意注册脚本的 <code class="highlighter-rouge">rancher/agent</code> 是否正确。正常情况下，通过操作界面获取的脚本内的版本信息都是正确的，用户不需要做额外修改。</p>
+</blockquote>
+
+<h4 id="section-4">自动添加的标签</h4>
+
+<p>Rancher 会自动创建一些和Linux内核版本信息以及Docker引擎版本信息相关的标签。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>键</th>
+      <th>值</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">io.rancher.host.linux_kernel_version</code></td>
+      <td>Linux内核版本 (e.g, <code class="highlighter-rouge">3.19</code>)</td>
+      <td>主机当前运行的内核版本</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">io.rancher.host.docker_version</code></td>
+      <td>Docker引擎版本 (e.g. <code class="highlighter-rouge">1.10</code>)</td>
+      <td>主机运行的 Docker 版本</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">io.rancher.host.provider</code></td>
+      <td>云提供商信息</td>
+      <td>目前仅适用于某些云提供商</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">io.rancher.host.region</code></td>
+      <td>云提供商地域</td>
+      <td>目前仅适用于云提供商</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">io.rancher.host.zone</code></td>
+      <td>云提供商区域</td>
+      <td>目前仅适用于云提供商</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="section-5">主机调度地址</h3>
+
+<p>为了使Rancher可以在<a href="/docs/rancher/v1.6/zh/cattle/scheduling/#多ip主机调度">有多个IP的主机上暴露端口</a>，需要给这些主机进行配置，从而使Rancher知道哪些IP可以使用。配置调度IP的方法取决于这台主机是已经存在的主机（运行了 <code class="highlighter-rouge">rancher/agent</code> 容器的服务器）还是还没有添加的主机（还没有运行 <code class="highlighter-rouge">rancher/agent</code> 容器的服务器）。</p>
+
+<h4 id="section-6">给已有主机添加调度地址</h4>
+<p>在环境中已存在的主机，可以通过增加<code class="highlighter-rouge">io.rancher.scheduler.ips</code>标签来设置调度IP。通过操作界面，点击这台主机的<strong>编辑</strong>按钮，然后增加 <strong>调度IP</strong>。如果是通过接口的方式，只需要给主机添加标签 <code class="highlighter-rouge">io.rancher.scheduler.ips</code> 和值（多个地址，可以通过逗号分隔）即可。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 在没有添加调度地址前，如果某些容器已经暴露了端口，那么这些容器的端口暴露在<code class="highlighter-rouge">0.0.0.0</code>上。那就意味着，已有的容器已经占用了全部的IP地址，后来添加的调度地址也被占用了。</p>
+</blockquote>
+
+<h4 id="section-7">给新主机添加调度地址</h4>
+
+<p>对于新添加的<a href="/docs/rancher/v1.6/zh/hosts/custom/">自定义主机</a> 需要像下面的例子，给注册脚本增加一个环境变量 <code class="highlighter-rouge">CATTLE_SCHEDULER_IPS</code> ：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$  </span>sudo docker run -e <span class="nv">CATTLE_SCHEDULER_IPS</span><span class="o">=</span><span class="s1">'1.2.3.4,&lt;IP2&gt;,..&lt;IPN&gt;'</span> -d --privileged <span class="se">\</span>
+    -v /var/run/docker.sock:/var/run/docker.sock rancher/agent:v0.8.2 <span class="se">\</span>
+    http://&lt;rancher-server-ip&gt;:8080/v1/projects/1a5/scripts/&lt;registrationToken&gt;
+</code></pre>
+</div>
+
+<h3 id="section-8">在代理后的主机</h3>
+
+<p>如果当前的环境是在代理之后，要给Rancher添加主机，需要修改这台主机的Docker deamon指向代理。相关的细节可以浏览<a href="/docs/rancher/v1.6/zh/hosts/custom/#添加代理服务器之后的主机">本文</a>，在此不在累述。</p>
+
+<p><a id="machine-config"></a></p>
+
+<h3 id="section-9">访问云提供商的主机</h3>
+
+<p>当用Rancher添加云提供商的主机时，实质上是采用Docker Machine执行的工作。</p>
+
+<h3 id="section-10">克隆主机</h3>
+
+<p>在云提供商上启动主机需要使用访问密钥，Rancher提供了克隆的方法，来轻松地创建另一个主机，而无需再次输入所有认证配置。在操作界面上，从 <strong>基础架构</strong> 进入 <strong>主机</strong> 页面，点击某台主机的下拉菜单，选择 <strong>克隆</strong>，然后就会进入之前的认证配置都已经填写的 <strong>添加主机</strong> 页面。</p>
+
+<h3 id="section-11">修改主机</h3>
+
+<p>在操作界面上，从 <strong>基础架构</strong> 进入 <strong>主机</strong> 页面，点击需要修改的主机的下拉菜单，选择 <strong>编辑</strong>，就可以修改这台主机的名称，描述以及标签。</p>
+
+<h3 id="section-12">启停主机</h3>
+
+<p>停止一台主机后，操作界面上会显示 <em>Inactive</em> 状态。在这种状态下，不会再有容器服务被部署到这台主机。而处于 <em>Active</em> 状态下的主机，容器服务会被正常的部署、停止、重启或销毁。</p>
+
+<p>如果需要停止一台主机，从 <strong>基础架构</strong> 进入 <strong>主机</strong> 页面，点击需要停止的这台主机的下拉菜单，选择 <strong>停用</strong> 即可。</p>
+
+<p>如果需要把一台停止的主机重新激活，从 <strong>基础架构</strong> 进入 <strong>主机</strong> 页面，点击已经停止的这台主机的下拉菜单，选择 <strong>激活</strong> 即可。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 在Rancher中如果主机宕机了（比如处于 <code class="highlighter-rouge">reconnecting</code> 或 <code class="highlighter-rouge">inactive</code> 的状态），需要给服务配置<a href="/docs/rancher/v1.6/zh/cattle/health-checks/">健康检查</a> 以便于Rancher把这台宕掉的主机上的容器服务迁移到其他主机上执行。</p>
+</blockquote>
+
+<h3 id="rancher">在Rancher内删除主机</h3>
+
+<p>在 Rancher 内删除主机的操作需要进行几个步骤：从 <strong>基础架构</strong> 进入 <strong>主机</strong> 页面，点击需要删除的主机的下拉菜单，选择 <strong>停用</strong>。当主机完成停止以后，将会显示 <em>Inactive</em> 状态。然后点击下拉菜单，选择 <strong>删除</strong>，Rancher 会执行对这台主机的删除操作。当显示 <em>Removed</em> 状态时，就表示这台主机已经被删除了。但是，仍然可以在操作界面上看到这台主机，只有当点击下拉菜单，选择 <strong>清理</strong>后，这台主机才会从操作界面上消失。</p>
+
+<p>如果这台主机是由 Rancher 调用 <code class="highlighter-rouge">docker-machiine</code> 基于云提供商的驱动创建，按照上述的删除操作执行后，被删除的主机也会在云提供商的管理界面中消失。但是，如果是采用 <a href="/docs/rancher/v1.6/zh/hosts/custom/">添加自定义主机</a> 的方式所添加的云提供商主机，被删除的主机还会在云提供商的管理界面中被查看到。而且这台主机内的容器服务（例如 <code class="highlighter-rouge">rancher/agent</code>）还是保留着的。可以认为通过自定义添加的云提供商的主机被删除后，只是从Rancher的调度中解离出去，但是它原来的生命周期Rancher不会干涉。</p>
+
+<blockquote>
+  <p><strong>注意：</strong> 对自定义主机，包括Rancher Agent在内的全部容器都会保留在该主机上。同时，Rancher网络驱动创建的<code class="highlighter-rouge">docker0</code>上的IP也将会保留。</p>
+</blockquote>
+
+<h3 id="rancher-1">在Rancher外删除主机</h3>
+
+<p>在Rancher外删除主机，也就是意味着不是按照Rancher操作界面或者API来删除主机。最简单的例子就是，在Rancher集群内，有一台云提供商提供的主机。通过云提供商的管理界面删除了这台主机，这个删除行为Rancher是无法感知的。Rancher会一直尝试重新连接这台已经删除的主机，并显示 <em>Reconnecting</em> 的状态，之后主机会显示 <em>Disconnected</em> 状态。 因此，为了同步回删除的状态，还需要从 <strong>基础架构</strong> 进入 <strong>主机</strong> 页面，点击已经删除的主机的下拉菜单，选择 <strong>删除</strong>。 你也可以配置一个延迟用于自动删除失联主机。这个配置叫做<code class="highlighter-rouge">host.remove.delay.seconds</code>，你可以在<code class="highlighter-rouge">系统</code> -&gt; <code class="highlighter-rouge">设置</code> -&gt; <code class="highlighter-rouge">高级选项</code>中找到这个配置。</p>
+
+    </div>
+</div>
+</div>
+</div>
+
+<div class="row wrap">
+<a class="btn btn-primary pull-right" href="https://github.com/rancher/rancher.github.io/tree/master/rancher/v1.6/zh/hosts/index.md">Edit this page <i class="fa fa-pencil"></i></a>
+</div>
+
+<footer class="clearfix">
+  <div class="wrap">
+    <div class=""><!--bottom footer-->
+      <div class="row">
+          <div class="col span-6">
+              <ul id="menu-footer" class="list-inline">
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="About Rancher Labs" href="http://rancher.com/about/">About Rancher Labs</a></li>
+                  <li id="menu-item-11352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11352"><a title="Contact" href="http://rancher.com/contact/">Contact</a></li>
+                  <li id="menu-item-14152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14152"><a title="Privacy" href="http://rancher.com/privacy/">Privacy</a></li>
+                  <li id="menu-item-15635" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15635"><a title="Careers" href="http://rancher.com/careers/">Careers</a></li>
+                  
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="English Docs" href="https://rancher.com/docs/rancher/latest/en/">English Docs</a></li>
+                  
+              </ul>
+              <p>Copyright &copy; 2014-2017 <a href="http://rancher.com">Rancher Labs</a>. All Rights Reserved.</p>
+          </div>
+          <div class="col span-6 text-right">
+              <ul class="list-inline">
+                  <li><a href="https://github.com/rancher/rancher" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-github.png" alt="Rancher Labs GitHub"></a></li>
+                  <li><a href="https://twitter.com/Rancher_Labs" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-twitter.png" alt="Rancher Labs Twitter"></a></li>
+                  <li><a href="https://slack.rancher.io/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-slack.png" alt="Rancher Labs Slack"></a></li>
+                  <li><a href="https://www.linkedin.com/groups/6977008/profile" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-linkedin.png" alt="Rancher Labs LinkedIn"></a></li>
+                  <li><a href="https://www.facebook.com/rancherlabs/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-fb.png" alt="Rancher Labs Facebook"></a></li>
+              </ul>
+          </div>
+      </div>
+    </div><!--bottom footer-->
+    </div>
+</footer>
+<script src="/docs/vendor/jquery.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/jquery.slicknav.min.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/rancher-docs.js?t=2017-12-04 13:23:19 -0800"></script>
+<!-- Start of Google Analytics -->
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-56382716-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End of Google Analytics -->
+<!-- Start of Async HubSpot Analytics Code -->
+<script type="text/javascript">
+(function(d, s, i, r) {
+    if (d.getElementById(i)) { return; }
+    var n = d.createElement(s),
+        e = d.getElementsByTagName(s)[0];
+    n.id = i;
+    n.src = '//js.hs-analytics.net/analytics/' + (Math.ceil(new Date() / r) * r) + '/468859.js';
+    e.parentNode.insertBefore(n, e);
+})(document, "script", "hs-analytics", 300000);
+</script>
+<!-- End of Async HubSpot Analytics Code -->
+</body>
+
+</html>
+

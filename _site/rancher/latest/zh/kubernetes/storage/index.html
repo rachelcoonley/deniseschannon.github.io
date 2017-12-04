@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Kubernetes Persistent Storage Support in Rancher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation for Rancher">
+    <link href="/docs/favicon.png" rel="shortcut icon" type="image/png" sizes="16x16">
+    <link href="/docs/css/syntax.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/font-awesome/css/font-awesome.min.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/lato/lato.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/lacsso.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/slicknav.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/rancher-docs.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+</head>
+
+<body class="bg-default">
+    <div class="row body">
+    <header class="page-header">
+      <div class="wrap clearfix">
+        <nav role="navigation" id="js-responsive-nav" class="clearfix responsive-nav"><a class="nav-toggle"></a>
+          <a class="nav-logo logo-caas btn bg-transparent"><img src="/docs/img/rancher-logo-nopadding.svg" class="img-responsive" alt="Rancher" data-pin-nopin="true"></a>
+          <ul class="nav-main nav-list">
+            <li><a href="http://rancher.com/">Back to Rancher.com</a></li>
+
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="https://github.com/rancher/rancher#installation" id="rnchrdm-nav-download" title="Download Rancher" target="_blank"><img src="/docs/img/header-download.svg" alt="Download Rancher" height="12" width="14"> Download Rancher</a></li>
+              <li><a href="http://rancher.com/support" id="rnchrdm-nav-reqsupport" title="Request Support"><i class="fa fa-question-circle" aria-hidden="true"></i>
+ Request Support</a></li>
+            </ul>
+          </ul>
+      </nav>
+    </div>
+    <h1>Rancher Docs</h1>
+  </header>
+  <div class="clearfix"></div>
+  <div class="wrap clearfix">
+        <div class="col span-3 mt-0 mr-0 sidebar">
+        <!--Start Google Search-->
+              <div class="gcse-search" id="google-search"></div>
+              <script>
+              var match = window.location.pathname.match(/\/rancher\/([^\/]+)/);
+              if (match) {
+                  document.getElementById('google-search').setAttribute('data-defaultToRefinement', match[1]);
+              }
+
+              (function() {
+                  var cx = '007896692384436596364:60akf3bfmxm';
+                  var gcse = document.createElement('script');
+                  gcse.type = 'text/javascript';
+                  gcse.async = true;
+                  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(gcse, s);
+              })();
+              </script>
+              <!--End Google Search-->
+
+<ul id="menu">
+    <li><a href="/docs/rancher/v1.6/zh/">简介</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/quick-start-guide/">快速开始</a></li>
+    <li>
+        <a href="#">安装Rancher<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/">安装 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#安装需求">安装需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#rancher-server-标签">Rancher Server标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署-non-ha">启动 Rancher Server - 单容器部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---多节点的ha部署">启动 Rancher Server - 多节点的HA部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#ha部署需求">HA部署需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---使用外部数据库">启动 Rancher Server - 单容器部署 - 使用外部数据库</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---挂载mysql数据库的数据目录">启动 Rancher Server - 单容器部署 - 挂载MYSQL数据库的数据目录</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#使用aws的elasticclassic-load-balancer作为rancher-server-ha的负载均衡器">使用AWS的ELB作为HA的负载均衡器</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#tls认证使用adopenldap">使用TLS认证的AD/OPENLDAP</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#在http代理后方启动-rancher-server">在HTTP代理后启动 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/selinux/">在SELinux模式下使用Rancher</a></li>
+          <li>
+               <a href="#">安装Rancher并使用SSL<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#需求">需求</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#nginx-配置模版">NGINX配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#apache-配置例子">Apache配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#haproxy-配置例子">HAProxy配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用aws的elastic-load-balancer作为rancher-server-ha的负载均衡器并使用ssl">使用AWS的ELB作为HA的负载均衡器并使用SSL</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#f5-big-ip配置示例">F5 BIG-IP配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用自签名证书-beta">使用自签名证书</a></li>
+               </ul>
+          </li>
+          <li>
+               <a href="#">内网启动Rancher<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用私有镜像仓库">使用私有镜像仓库</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用http代理">使用HTTP代理</a></li>
+               </ul>
+          </li>
+        </ul>
+    </li>
+    <li>
+         <a href="#">升级Rancher Server<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/">升级Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#rancher-server-tags">Rancher Server标签</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#基础设施服务]">升级基础设施服务</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#升级ha架构">升级HA架构的Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---外部数据库">升级非HA模式的Rancher Server - 外部数据库</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---绑定挂载的mysql卷">升级非HA模式的Rancher Server - 绑定挂载的MYSQL卷</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#没有互联网访问的rancher服务器">升级内网中的Rancher Server</a></li>
+        </ul>
+     </li>
+    <li>
+         <a href="#">系统设置<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li>
+                <a href="#">访问控制方式<i class="pull-right fa fa-angle-down"></i></a>
+                <ul>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#活动目录">Active Directory</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#azure-ad">Azure AD</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#github">Github</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#本地身份认证">本地身份认证</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#openldap">OpenLDAP</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#shibboleth">Shibboleth</a></li>
+                </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#访问控制">访问控制</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#限制并发登陆">限制并发登陆</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/accounts/">账户</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#主机注册">注册主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#应用商店">应用商店</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/machine-drivers/">主机驱动</a></li>
+        </ul>
+    </li>
+    <li>
+          <a href="#">环境<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+            <li><a href="/docs/rancher/v1.6/zh/environments/">环境管理</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#什么是环境模版">环境模版</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#成员角色">环境中的角色</a></li>
+          </ul>
+    </li>
+    <li>
+        <a href="#">主机<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/">主机简介</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#docker版本适用对比">支持的Docker版本</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机标签">主机标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机调度地址">主机调度地址</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在代理后的主机">在代理后的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/custom/">添加自定义主机</a></li>
+          <li>
+              <a href="#">添加云主机<i class="pull-right fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/amazon/">添加Amazon EC2主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/azure/">添加Azure主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/digitalocean/">添加DigitalOcean主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/exoscale/">添加Exoscale主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/packet/">添加Packet主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/rackspace/">添加Rackspace主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/other/">添加其他云服务商的主机</a></li>
+              </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#访问云提供商的主机">访问云提供商的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在rancher内删除主机">删除主机</a></li>
+        </ul>
+    </li>
+    <li>
+      <a href="#">镜像仓库<i class="pull-right fa fa-angle-down"></i></a>
+      <ul>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/">镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#不安全的镜像库">不安全的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#自签名证书">自签名证书</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用亚马逊的ecr镜像库">使用亚马逊的ECR镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用google容器镜像仓库">使用Google容器镜像仓库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#更改默认的镜像库">更改默认的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#限制镜像库的使用">限制镜像库的使用</a></li>
+      </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/environments/certificates/">证书</a></li>
+    <li>
+      <a href="#">系统服务<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/">基础设施服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/networking/">网络</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/network-policy/">网络策略</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/load-balancer">负载均衡器</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/dns-service/">DNS服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/metadata-service/">Metadata服务</a></li>
+              <li>
+                  <a href="#">存储服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/">存储服务</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-nfs/">Rancher NFS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-ebs/">Rancher EBS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/">调度器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#多ip主机调度">多IP主机调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#基于资源约束的调度">基于资源约束的调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#在主机上调度指定服务">在主机上调度指定服务</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/audit-log/">审计日志</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/service-accounts/">服务账号</a></li>
+           </ul>
+    </li>
+    <li>
+          <a href="#">Cattle<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/stacks/">应用</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-services/">服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/volumes/">卷</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/">负载均衡</a></li>
+                <li>
+                    <a href="#">在UI中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#如何在ui上新增一个负载均衡">添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#服务规则">服务规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#选择器规则">选择器规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止">SSL会话终止</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#负载均衡的会话粘性">负载均衡的会话粘性</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义haproxycfg">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#标签调度负载均衡">标签调度负载均衡</a></li>
+                      </ul>
+                </li>
+                <li>
+                    <a href="#">在CLI和Compose中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#用rancher-compose-添加负载均衡">用Rancher Compose 添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#源端口">源端口</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#端口规则">端口规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#证书">证书</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义配置">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#会话粘性策略">会话粘性策略</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#load-balancer-example-l7">七层负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#内部负载均衡例子">内部负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止-example">SSL会话终止示例</a></li>
+                      </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-external-services/">外部服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-service-alias/">服务别名</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/health-checks/">健康检查</a></li>
+                <li>
+                    <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/">调度</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在ui中添加标签">在UI中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在rancher-compose中添加标签">在Rancher Compose中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#调度标签表">调度标签表</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/upgrading/">升级服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/internal-dns-service/">Cattle环境中的内部DNS服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/external-dns-service/">外部DNS服务</a></li>
+                <li>
+                    <a href="#">Rancher-Compose<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/">Rancher Compose</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/commands/">指令与参数</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/environment-interpolation/">环境插值</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/build/">使用AWS S3构建镜像</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/secrets/">密文 - 实验性的</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/webhook-service/">Webhooks</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/labels/">标签</a></li>
+          </ul>
+    </li>
+    <li>
+          <a href="#">Kubernetes<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/">启动Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/resiliency-planes/">弹性平面</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/providers/">Cloud Providers</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/private-registry/">私有镜像仓库</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/rbac/">RBAC</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/disaster-recovery/">灾难恢复</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/backups/">备份</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/storage/">持久化存储</a></li>
+              <li>
+                  <a href="#">插件支持<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/">插件支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#helm">Helm</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#skydns">SkyDNS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">Ingress支持与配置<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/">Ingress支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#基于主机路由配置-ingress-资源">基于主机路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#使用基于路径的路由配置ingress资源">使用基于路径的路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例两个负载均衡器使用交替的端口">多个负载均衡器使用不同的端口</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例使用tls">使用 TLS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#禁用http">禁用HTTP</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例用户定制">示例用户定制</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在所有主机上运行负载均衡器">所有主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在特定主机上运行负载均衡器">特定主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#例将流量导向同一主机上的不同容器">将流量导向同一主机上的不同容器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在同一主机上对容器的流量进行优先级排序">在同一主机上对容器的流量进行优先级排序</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/upgrading/">升级Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/deleting/">删除Kubernetes</a></li>
+
+          </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/mesos/">Mesos</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/swarm/">Swarm - 实验性的 </a></li>
+    <li><a href="/docs/rancher/v1.6/zh/windows/">Windows - 实验性的</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/native-docker/">以原生Docker命令行的形式使用Rancher</a></li>
+    <li>
+            <a href="#">应用商店<i class="pull-right fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/">应用商店</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/private-catalog/">创建私有应用商店</a></li>
+            </ul>
+        </li>
+    <li><a href="#">Rancher命令行<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/cli/">Rancher命令行</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/commands/">命令和选项</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/variable-interpolation/">变量替换</a></li>
+        </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/en/api/v2-beta/">API文档</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/contributing/">Rancher社区贡献</a></li>
+    <li>
+        <a href="#">常见问题<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/server/">Rancher Server的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/agents/">Rancher Agent的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/troubleshooting/">常见的故障排查与修复方法</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="btn-docs">历史文档<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.5/zh/">Rancher v1.5</a></li>
+            <li><a href="/docs/rancher/v1.4/zh/">Rancher v1.4</a></li>
+            <li><a href="/docs/rancher/v1.3/zh/">Rancher v1.3</a></li>
+            <li><a href="/docs/rancher/v1.2/zh/">Rancher v1.2</a></li>
+            <li><a href="/docs/rancher/v1.1/zh/">Rancher v1.1</a></li>
+            <li><a href="/docs/rancher/v1.0/en/">Rancher v1.0</a></li>
+        </ul>
+    </li>
+</ul>
+
+</div>
+<div class="col span-9">
+    <div class="content-container">
+        <h2 id="kubernetes">Kubernetes中的持久化存储</h2>
+<hr />
+
+<p>Rancher能够通过Kubernetes原生资源对象创建拥有持久化存储的服务。在Kubernetes中, <a href="https://kubernetes.io/docs/user-guide/persistent-volumes/">持久化存储</a>通过API资源对象管理, 其中包括<code class="highlighter-rouge">PersistentVolume</code>和<code class="highlighter-rouge">PersistentVolumeClaim</code>。Kubernetes中的存储组件支持多种后端存储(例如：NFS、EBS等), 存储具有独立于pod的生命周期。根据你希望使用的持久化卷的类型，你可能需要<a href="/docs/rancher/v1.6/zh/kubernetes/providers/">设置Kubernetes环境</a>.</p>
+
+<p>以下是如何在Rancher的Kubernetes环境中使用<a href="#persistent-volumes---nfs">NFS</a>和<a href="#persistent-volumes---ebs">EBS</a>的示例。</p>
+
+<h3 id="persistent-volumes---nfs">Persistent Volumes - NFS</h3>
+
+<p>在Kubernetes中使用NFS卷时，文件系统(也就是NFS)将被挂载在pod中。NFS允许多个pod同时进行写操作，这些pod使用相同的persistent volume claim。通过使用NFS卷，相同的数据可以在多个pod之间共享。</p>
+
+<h4 id="nfs">NFS设置</h4>
+
+<p>你需要有一台正常运行的NFS服务器并设置了共享目录。在下面的示例中，我们假定<code class="highlighter-rouge">/nfs</code>被设置为共享目录。</p>
+
+<h4 id="persistent-volumes-pvpersistent-volume-claims-pvc">创建Persistent Volumes (PV)和Persistent Volume Claims (PVC)</h4>
+
+<p>在Kubernetes模板中，<code class="highlighter-rouge">kind</code>需要被设置为<code class="highlighter-rouge">PersistentVolume</code>并使用<code class="highlighter-rouge">nfs</code>资源。 服务器将使用<code class="highlighter-rouge">&lt;IP_OF_NFS_SERVER&gt;</code>中设置的地址以及path所指定的路径作为共享目录(在我们的示例yaml文件中也就是<code class="highlighter-rouge">/nfs</code>目录)。</p>
+
+<p>示例<code class="highlighter-rouge">pv-nfs.yml</code>文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">PersistentVolume</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">nfs</span>
+<span class="s">spec</span><span class="pi">:</span>
+  <span class="s">capacity</span><span class="pi">:</span>
+    <span class="s">storage</span><span class="pi">:</span> <span class="s">1Mi</span>
+  <span class="s">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteMany</span>
+  <span class="s">nfs</span><span class="pi">:</span>
+    <span class="s">server</span><span class="pi">:</span> <span class="s">&lt;IP_OF_NFS_SERVER&gt;</span>
+    <span class="c1"># Exported path of your NFS server</span>
+    <span class="s">path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/nfs"</span>
+</code></pre>
+</div>
+
+<p>通过<code class="highlighter-rouge">kubectl</code>客户端, 我们可以使用下面的命令在Kubernetes中创建persistent volume。记住, 你可以通过<a href="/docs/rancher/v1.6/zh/kubernetes/#kubectl">为本地主机配置<code class="highlighter-rouge">kubectl</code></a>在本机使用kubectl客户端或者通过UI界面中的<strong>Kubernetes</strong> -&gt; <strong>kubectl</strong> 命令行界面使用kubectl客户端。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl create -f pv-nfs.yml
+</code></pre>
+</div>
+
+<p>创建persistent volume之后, 你可以创建persistent volume claim，用于请求创建的persistent volume资源。</p>
+
+<p>示例<code class="highlighter-rouge">pvc-nfs.yml</code>文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">nfs</span>
+<span class="s">spec</span><span class="pi">:</span>
+  <span class="s">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteMany</span>
+  <span class="s">resources</span><span class="pi">:</span>
+    <span class="s">requests</span><span class="pi">:</span>
+      <span class="s">storage</span><span class="pi">:</span> <span class="s">1Mi</span>
+</code></pre>
+</div>
+
+<p>通过<code class="highlighter-rouge">kubectl</code>客户端, 我们可以使用以下命令在Kubernetes中创建persistent volume claim。记住，你可以通过<a href="/docs/rancher/v1.6/zh/kubernetes/#kubectl">为本地主机配置<code class="highlighter-rouge">kubectl</code></a>在本机使用kubectl客户端或者通过UI界面中的<strong>Kubernetes</strong> -&gt; <strong>kubectl</strong> 命令行界面使用kubectl客户端。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl create -f pvc-nfs.yml
+</code></pre>
+</div>
+
+<p>在创建了persistent volume和persistent volume claim之后, 你可以通过以下命令确认persistent volume已绑定。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl get pv,pvc
+
+NAME      CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS    CLAIM         REASON    AGE
+pv/nfs    1Mi        RWX           Retain          Bound     default/nfs             8s
+
+NAME      STATUS    VOLUME    CAPACITY   ACCESSMODES   AGE
+pvc/nfs   Bound     nfs       1Mi        RWX           5s
+</code></pre>
+</div>
+
+<h4 id="podpersistent-volume-claim">创建一个Pod使用Persistent Volume Claim</h4>
+
+<p>现在persistent volume claim已经被创建, 我们可以创建使用这个persistent volume claim的pods。这些pods将会访问相同的数据。</p>
+
+<p>示例<code class="highlighter-rouge">rc-nfs.yml</code>文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">ReplicationController</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">rc-nfs-test</span>
+<span class="s">spec</span><span class="pi">:</span>
+  <span class="s">replicas</span><span class="pi">:</span> <span class="s">2</span>
+  <span class="s">selector</span><span class="pi">:</span>
+    <span class="s">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="s">template</span><span class="pi">:</span>
+    <span class="s">metadata</span><span class="pi">:</span>
+      <span class="s">labels</span><span class="pi">:</span>
+        <span class="s">app</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="s">spec</span><span class="pi">:</span>
+      <span class="s">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="s">ports</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">nginx</span>
+            <span class="s">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="s">volumeMounts</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">nfs</span>
+              <span class="s">mountPath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/usr/share/nginx/html"</span>
+      <span class="s">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">nfs</span>
+        <span class="s">persistentVolumeClaim</span><span class="pi">:</span>
+          <span class="s">claimName</span><span class="pi">:</span> <span class="s">nfs</span>
+</code></pre>
+</div>
+
+<p>通过<code class="highlighter-rouge">kubectl</code>客户端, 我们可以使用以下命令在Kubernetes中创建replication controller和两个pods。记住，你可以通过<a href="/docs/rancher/v1.6/zh/kubernetes/#kubectl">为本地主机配置<code class="highlighter-rouge">kubectl</code></a>在本机使用kubectl客户端或者通过UI界面中的<strong>Kubernetes</strong> -&gt; <strong>kubectl</strong> 命令行界面使用kubectl客户端。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl create -f rc-nfs-test.yml
+service <span class="s2">"nginx-service"</span> created
+replicationcontroller <span class="s2">"nginx"</span> created
+
+<span class="gp">$ </span>kubectl get pods
+NAME           READY     STATUS    RESTARTS   AGE
+rc-nfs-test-42785   1/1       Running   0          10s
+rc-nfs-test-rt3ld   1/1       Running   0          10s
+</code></pre>
+</div>
+
+<p>我们可以测试两个pods都可以访问同一个persistent volume以及NFS服务端产生的修改。示例如下，我们可以在NFS服务器端的<code class="highlighter-rouge">/nfs</code>目录下创建一个文件。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"NFS Works!"</span> &gt; /nfs/index.html
+</code></pre>
+</div>
+
+<p>在NFS服务器端创建文件后，我们可以在两个pods中查看这个文件。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ kubectl exec rc-nfs-test-42785 cat /usr/share/nginx/html/index.html
+NFS Works!
+$ kubectl exec rc-nfs-test-rt3ld cat /usr/share/nginx/html/index.html
+NFS Works!
+</code></pre>
+</div>
+
+<h3 id="persistent-volumes---ebs">Persistent Volumes - EBS</h3>
+
+<p>要在Kubernetes中使用EBS作为persistent volume，你需要对Kubernetes进行一些设置。</p>
+
+<ol>
+  <li>参考<a href="/docs/rancher/v1.6/zh/kubernetes/providers/#aws">AWS cloud provider选项</a>文档中的步骤设置Kubernetes环境.</li>
+  <li>所有<a href="/docs/rancher/v1.6/zh/hosts/">主机</a>必须是AWS EC2实例并且拥有正确的IAM策略。</li>
+</ol>
+
+<p>在Kubernetes中使用EBS数据卷的操作可以分为两种: <a href="#静态初始化">静态初始化</a>, 和通过storage classes<a href="#动态创建">动态初始化</a>。</p>
+
+<h4 id="section">静态初始化</h4>
+
+<p>在Kubernetes环境中使用persistent volume之前，需要预先在Rancher主机所在的AWS区域和可用区中创建EBS卷。为了使用persistent volume, 你需要先创建persistent volume资源对象。</p>
+
+<p>示例<code class="highlighter-rouge">pv-ebs.yml</code>文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">kind</span><span class="pi">:</span> <span class="s">PersistentVolume</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">ebs</span>
+<span class="s">spec</span><span class="pi">:</span>
+  <span class="s">capacity</span><span class="pi">:</span>
+    <span class="s">storage</span><span class="pi">:</span> <span class="s">1Gi</span>
+  <span class="s">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="s">persistentVolumeReclaimPolicy</span><span class="pi">:</span> <span class="s">Recycle</span>
+  <span class="s">awsElasticBlockStore</span><span class="pi">:</span>
+    <span class="s">fsType</span><span class="pi">:</span> <span class="s">ext4</span>
+    <span class="c1"># The EBS volume ID</span>
+    <span class="s">volumeID</span><span class="pi">:</span> <span class="s">&lt;VOLUME_ID_IN_EBS&gt;</span>
+</code></pre>
+</div>
+
+<p>通过<code class="highlighter-rouge">kubectl</code>客户端, 我们可以使用以下命令在Kubernetes中创建persistent volume。 文件中的<code class="highlighter-rouge">&lt;VOLUME_ID_IN_EBS&gt;</code>需要被替换为相应的EBS volume id。 记住，你可以通过<a href="/docs/rancher/v1.6/zh/kubernetes/#kubectl">为本地主机配置<code class="highlighter-rouge">kubectl</code></a>在本机使用kubectl客户端或者通过UI界面中的<strong>Kubernetes</strong> -&gt; <strong>kubectl</strong> 命令行界面使用kubectl客户端。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl create -f pv-ebs.yml
+</code></pre>
+</div>
+
+<p>创建persistent volume之后, 你可以创建persistent volume claim，用于请求创建的persistent volume资源。</p>
+
+<p>Example <code class="highlighter-rouge">pvc-ebs.yml</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">pvs-ebs</span>
+<span class="s">spec</span><span class="pi">:</span>
+  <span class="s">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="s">resources</span><span class="pi">:</span>
+    <span class="s">requests</span><span class="pi">:</span>
+      <span class="s">storage</span><span class="pi">:</span> <span class="s">1Gi</span>
+  <span class="s">selector</span><span class="pi">:</span>
+    <span class="s">matchLabels</span><span class="pi">:</span>
+      <span class="s">release</span><span class="pi">:</span> <span class="s2">"</span><span class="s">stable"</span>
+</code></pre>
+</div>
+
+<p>在创建了persistent volume和persistent volume claim之后, 你可以通过以下命令确认persistent volume已绑定。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl get pv,pvc
+</code></pre>
+</div>
+
+<h4 id="podpersistent-volume-claim-1">创建一个Pod使用Persistent Volume Claim</h4>
+
+<p>创建persistent volume claim之后, 你只需要创建一个pod来使用它。</p>
+
+<p>示例<code class="highlighter-rouge">pod-ebs.yml</code>文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">mypod</span>
+<span class="s">spec</span><span class="pi">:</span>
+  <span class="s">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">myfrontend</span>
+      <span class="s">image</span><span class="pi">:</span> <span class="s">nginx</span>
+      <span class="s">volumeMounts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mountPath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/html"</span>
+        <span class="s">name</span><span class="pi">:</span> <span class="s">ebs</span>
+  <span class="s">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">name</span><span class="pi">:</span> <span class="s">ebs</span>
+      <span class="s">persistentVolumeClaim</span><span class="pi">:</span>
+        <span class="s">claimName</span><span class="pi">:</span> <span class="s">pvc-ebs</span>
+</code></pre>
+</div>
+
+<p>在pod使用了相应的卷之后，AWS中卷的状态应当从<code class="highlighter-rouge">可用</code>变为<code class="highlighter-rouge">使用中</code>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl get pods,pv,pvc
+NAME       READY     STATUS    RESTARTS   AGE
+po/mypod   1/1       Running   0          3m
+
+NAME      CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS    CLAIM             REASON    AGE
+pv/ebs    1Gi        RWO           Recycle         Bound     default/myclaim             3m
+
+NAME          STATUS    VOLUME    CAPACITY   ACCESSMODES   AGE
+pvc/pvc-ebs  Bound     pv1       1Gi        RWO           3m
+</code></pre>
+</div>
+
+<h4 id="section-1">动态创建</h4>
+
+<p>在Kubernetes中使用EBS的另外一种方法是<a href="http://blog.kubernetes.io/2016/10/dynamic-provisioning-and-storage-in-kubernetes.html">动态创建</a>, 这种方式使用<a href="https://kubernetes.io/docs/user-guide/persistent-volumes/#class-1">StorageClass</a>自动创建并挂载数据卷到pods中。在我们的示例中, storage class将指定AWS作为storage provider并使用<code class="highlighter-rouge">gp2</code>类型以及<code class="highlighter-rouge">us-west-2a</code>可用区。</p>
+
+<p>示例<code class="highlighter-rouge">storage-class.yml</code>文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
+<span class="s">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1beta1</span>
+<span class="s">metadata</span><span class="pi">:</span>
+  <span class="s">name</span><span class="pi">:</span> <span class="s">standard</span>
+<span class="s">provisioner</span><span class="pi">:</span> <span class="s">kubernetes.io/aws-ebs</span>
+<span class="s">parameters</span><span class="pi">:</span>
+  <span class="s">type</span><span class="pi">:</span> <span class="s">gp2</span>
+  <span class="s">zone</span><span class="pi">:</span> <span class="s">us-west-2a</span>
+</code></pre>
+</div>
+
+<h4 id="podstorage-classes">创建Pod使用Storage Classes</h4>
+
+<p>你可以在任何pod中使用storage class从而使Kubernetes自动创建新的卷并挂载到pod中。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PersistentVolumeClaim"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"apiVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"claim2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"annotations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"volume.beta.kubernetes.io/storage-class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"spec"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"accessModes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"ReadWriteOnce"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"requests"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"storage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1Gi"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>通过在pod中使用这种请求方式，你将看到一个新的pv被创建并自动和pvc绑定:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>kubectl get pv,pvc,pods
+NAME                                          CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS    CLAIM             REASON    AGE
+pv/pvc-36fcf5dd-f476-11e6-b547-0275ac92095a   1Gi        RWO           Delete          Bound     default/claim2              1m
+
+NAME          STATUS    VOLUME                                     CAPACITY   ACCESSMODES   AGE
+pvc/claim2    Bound     pvc-36fcf5dd-f476-11e6-b547-0275ac92095a   1Gi        RWO           1m
+
+NAME       READY     STATUS    RESTARTS   AGE
+po/nginx   1/1       Running   0          29s
+</code></pre>
+</div>
+
+    </div>
+</div>
+</div>
+</div>
+
+<div class="row wrap">
+<a class="btn btn-primary pull-right" href="https://github.com/rancher/rancher.github.io/tree/master/rancher/latest/zh/kubernetes/storage/index.md">Edit this page <i class="fa fa-pencil"></i></a>
+</div>
+
+<footer class="clearfix">
+  <div class="wrap">
+    <div class=""><!--bottom footer-->
+      <div class="row">
+          <div class="col span-6">
+              <ul id="menu-footer" class="list-inline">
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="About Rancher Labs" href="http://rancher.com/about/">About Rancher Labs</a></li>
+                  <li id="menu-item-11352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11352"><a title="Contact" href="http://rancher.com/contact/">Contact</a></li>
+                  <li id="menu-item-14152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14152"><a title="Privacy" href="http://rancher.com/privacy/">Privacy</a></li>
+                  <li id="menu-item-15635" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15635"><a title="Careers" href="http://rancher.com/careers/">Careers</a></li>
+                  
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="English Docs" href="https://rancher.com/docs/rancher/latest/en/">English Docs</a></li>
+                  
+              </ul>
+              <p>Copyright &copy; 2014-2017 <a href="http://rancher.com">Rancher Labs</a>. All Rights Reserved.</p>
+          </div>
+          <div class="col span-6 text-right">
+              <ul class="list-inline">
+                  <li><a href="https://github.com/rancher/rancher" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-github.png" alt="Rancher Labs GitHub"></a></li>
+                  <li><a href="https://twitter.com/Rancher_Labs" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-twitter.png" alt="Rancher Labs Twitter"></a></li>
+                  <li><a href="https://slack.rancher.io/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-slack.png" alt="Rancher Labs Slack"></a></li>
+                  <li><a href="https://www.linkedin.com/groups/6977008/profile" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-linkedin.png" alt="Rancher Labs LinkedIn"></a></li>
+                  <li><a href="https://www.facebook.com/rancherlabs/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-fb.png" alt="Rancher Labs Facebook"></a></li>
+              </ul>
+          </div>
+      </div>
+    </div><!--bottom footer-->
+    </div>
+</footer>
+<script src="/docs/vendor/jquery.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/jquery.slicknav.min.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/rancher-docs.js?t=2017-12-04 13:23:19 -0800"></script>
+<!-- Start of Google Analytics -->
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-56382716-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End of Google Analytics -->
+<!-- Start of Async HubSpot Analytics Code -->
+<script type="text/javascript">
+(function(d, s, i, r) {
+    if (d.getElementById(i)) { return; }
+    var n = d.createElement(s),
+        e = d.getElementsByTagName(s)[0];
+    n.id = i;
+    n.src = '//js.hs-analytics.net/analytics/' + (Math.ceil(new Date() / r) * r) + '/468859.js';
+    e.parentNode.insertBefore(n, e);
+})(document, "script", "hs-analytics", 300000);
+</script>
+<!-- End of Async HubSpot Analytics Code -->
+</body>
+
+</html>
+

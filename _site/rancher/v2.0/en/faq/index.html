@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rancher v2.0 FAQ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation for Rancher">
+    <link href="/docs/favicon.png" rel="shortcut icon" type="image/png" sizes="16x16">
+    <link href="/docs/css/syntax.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/font-awesome/css/font-awesome.min.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/lato/lato.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/lacsso.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/slicknav.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/rancher-docs.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+</head>
+
+<body class="bg-default">
+    <div class="row body">
+    <header class="page-header">
+      <div class="wrap clearfix">
+        <nav role="navigation" id="js-responsive-nav" class="clearfix responsive-nav"><a class="nav-toggle"></a>
+          <a class="nav-logo logo-caas btn bg-transparent"><img src="/docs/img/rancher-logo-nopadding.svg" class="img-responsive" alt="Rancher" data-pin-nopin="true"></a>
+          <ul class="nav-main nav-list">
+            <li><a href="http://rancher.com/">Back to Rancher.com</a></li>
+
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="https://github.com/rancher/rancher#installation" id="rnchrdm-nav-download" title="Download Rancher" target="_blank"><img src="/docs/img/header-download.svg" alt="Download Rancher" height="12" width="14"> Download Rancher</a></li>
+              <li><a href="http://rancher.com/support" id="rnchrdm-nav-reqsupport" title="Request Support"><i class="fa fa-question-circle" aria-hidden="true"></i>
+ Request Support</a></li>
+            </ul>
+          </ul>
+      </nav>
+    </div>
+    <h1>Rancher Docs</h1>
+  </header>
+  <div class="clearfix"></div>
+  <div class="wrap clearfix">
+        <div class="col span-3 mt-0 mr-0 sidebar">
+        <!--Start Google Search-->
+              <div class="gcse-search" id="google-search"></div>
+              <script>
+              var match = window.location.pathname.match(/\/rancher\/([^\/]+)/);
+              if (match) {
+                  document.getElementById('google-search').setAttribute('data-defaultToRefinement', match[1]);
+              }
+
+              (function() {
+                  var cx = '007896692384436596364:60akf3bfmxm';
+                  var gcse = document.createElement('script');
+                  gcse.type = 'text/javascript';
+                  gcse.async = true;
+                  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(gcse, s);
+              })();
+              </script>
+              <!--End Google Search-->
+
+<ul id="menu">
+    <li><a href="#">Quick Start Guide</a></li>
+    <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#prepare-host">Preparing a Linux Host</a></li>
+    <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#launch-rancher">Launching Rancher Server</a></li>
+    <li>
+        <a href="#">Adding Hosts<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#addhost">Adding Hosts</a></li>
+            <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#cloudprovided">Adding Hosts from Cloud Providers</a></li>
+            <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#custom">Adding Custom Hosts</a></li>
+        </ul>
+    <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#import-k8s">Importing Existing Kubernetes Clusters</a></li>
+    <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#containers">Adding Containers</a></li>
+    <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#catalog">Launching Catalog Applications</a></li>
+    <li><a href="/docs/rancher/v2.0/en/quick-start-guide/#advanced-k8s">Using Advanced Kubernetes Options</a></li>
+    <li><a href="/docs/rancher/v2.0/en/faq/">FAQ</a></li>
+</ul>
+
+</div>
+<div class="col span-9">
+    <div class="content-container">
+        <h2 id="rancher-v20-faq">Rancher v2.0 FAQ</h2>
+<hr />
+
+<p>This FAQ is a work in progress designed to answers the questions our users most frequently ask about Rancher v2.0.</p>
+
+<h3 id="kubernetes">Kubernetes</h3>
+
+<h4 id="what-does-it-mean-when-you-say-rancher-v20-is-built-on-kubernetes">What does it mean when you say Rancher v2.0 is built on Kubernetes?</h4>
+
+<p>Rancher v2.0 is a complete container management platform built on Kubernetes, which means that:</p>
+
+<ul>
+  <li>The Rancher-Kubernetes distribution powers the embedded Kubernetes master and enables easy setup and operations of Kubernetes clusters.</li>
+  <li>Rancher imports existing Kubernetes clusters built using other tools, like kops, or operated by cloud providers, like GKE.</li>
+  <li>Rancher manages Kubernetes clusters across any infrastructure, including public cloud, private cloud, virtualization clusters, and bare metal servers.</li>
+  <li>Rancher enables multi-cluster management across both embedded clusters and imported clusters.</li>
+  <li>In addition to the native Kubernetes UX via <code class="highlighter-rouge">kubectl</code> or dashboard, Rancher also offers a compelling user experience built on Kubernetes.</li>
+</ul>
+
+<h4 id="do-you-plan-to-implement-upstream-kubernetes-or-continue-to-work-on-your-own-fork">Do you plan to implement upstream Kubernetes, or continue to work on your own fork?</h4>
+
+<p>We’re still going to provide our distribution when you select the default option of having us manage your Kubernetes cluster, but it will be very close to upstream. We’re adding a few enhancements, like integration with a MySQL database and making the Kubernetes master multi-tenant to support multiple clusters.</p>
+
+<h4 id="does-this-release-mean-that-we-need-to-re-train-our-support-staff-in-kubernetes">Does this release mean that we need to re-train our support staff in Kubernetes?</h4>
+
+<p>No. You don’t need to learn Kubernetes, but you’ll have it as an option if you want to leverage any integrations that work directly with the Kubernetes API. However, nothing from a UI or operations perspective is changing with the move to Kubernetes. Operations remain the same.</p>
+
+<h4 id="so-wait-is-a-rancher-compose-going-to-make-a-kubernetes-pod-do-we-have-to-learn-both-now-we-usually-use-the-filesystem-layer-of-files-not-the-ui">So, wait. Is a Rancher compose going to make a Kubernetes pod? Do we have to learn both now? We usually use the filesystem layer of files, not the UI.</h4>
+
+<p>You do not need to learn both, but you’ll have access to both and can easily use either depending on what makes most sense.</p>
+
+<h3 id="cattle">Cattle</h3>
+
+<h4 id="how-does-rancher-v20-affect-cattle-does-this-release-mean-that-my-knowledge-and-experience-invested-in-cattle-is-about-to-become-deprecated">How does Rancher v2.0 affect Cattle? Does this release mean that my knowledge and experience invested in Cattle is about to become deprecated?</h4>
+
+<p>We definitely are NOT deprecating Cattle. On the contrary, we improved it. In v2.0, Rancher now bases its architecture and every cluster/environment on Kubernetes. While v1.0 already supported installing, operating, and managing Kubernetes environments, we’ve always felt that it didn’t mesh with the rest of the Rancher user experience (UX). We remedied that in v2.0. Not only do you get access to the native Kubernetes dashboard UI and <code class="highlighter-rouge">kubectl</code>, but now the Rancher UX, formerly known as the Cattle UX (CLI, API, and Docker compose) works directly with Kubernetes.</p>
+
+<p>Think of v2.0 as an enhanced add-on to the Kubernetes platform in which you can continue to use all of the existing Rancher features you know and love, while leveraging the rich Kubernetes ecosystem and its rapid innovations.</p>
+
+<h4 id="can-i-migrateimport-existing-cattle-clusters-into-kubernetes">Can I migrate/import existing Cattle clusters into Kubernetes?</h4>
+
+<p>Yes. You can run the exact same Rancher compose and Docker compose files against a new cluster and recreate all of your deployments identically.</p>
+
+<h3 id="environments--clusters">Environments &amp; Clusters</h3>
+
+<h4 id="can-i-still-create-templates-for-environments-and-clusters">Can I still create templates for environments and clusters?</h4>
+
+<p>Yes. This feature still exists, except that you can no longer select Swarm or Mesos (now available only as Catalog applications).</p>
+
+<h4 id="can-you-still-add-an-existing-host-to-an-environment-ie-not-provisioned-directly-from-rancher">Can you still add an existing host to an environment? (i.e. not provisioned directly from Rancher)</h4>
+
+<p>Yes. We still provide you with the same way of executing our Rancher agents directly on hosts.</p>
+
+<h4 id="can-you-showcase-how-you-share-hosts-between-rancher-environments">Can you showcase how you share hosts between Rancher environments?</h4>
+
+<p>We’ve introduced the concept of a cluster in v2.0, which is a group of hosts. Rancher allows you to create multiple environments, which translates to a Kubernetes namespace, on a single cluster. <a href="https://www.youtube.com/watch?v=Ma6FsuWI2Nc&amp;feature=youtu.be">Watch this demo</a> for more information.</p>
+
+<h4 id="if-i-have-catalog-items-set-to-use-managed-network-can-i-deploy-them-in-an-imported-kubernetes-cluster-or-do-they-have-to-run-on-the-rancher-kubernetes-distribution">If I have catalog items set to use managed network, can I deploy them in an imported Kubernetes cluster, or do they have to run on the Rancher-Kubernetes distribution?</h4>
+
+<p>Our goal is to have Catalog items run on any Kubernetes clusters, embedded or imported.</p>
+
+<h4 id="at-what-layer-do-multi-tenancy-and-access-control-come-in-is-it-within-a-kubernetes-cluster-or-in-an-environment">At what layer do multi-tenancy and access control come in? Is it within a Kubernetes cluster or in an environment?</h4>
+
+<p>Initially, Rancher creates a Default cluster and environment for you. Rancher supports grouping resources into multiples clusters and environments. A cluster is a group of physical (or virtual) compute resources. Each environment is tied to one cluster and runs its containers on the cluster’s hosts, and you can share a cluster with more than one environment. An environment is a namespace where applications, services, and containers are defined. The containers in an environment can communicate with each other over a shared managed network, and you can give different users/groups access to manage the resources of the environment.</p>
+
+<h3 id="upgradingmigrating">Upgrading/Migrating</h3>
+
+<h4 id="how-would-the-migration-from-v1x-to-v20-work">How would the migration from v1.x to v2.0 work?</h4>
+
+<p>Due to the technical difficulty in transforming a Docker container into a pod running Kubernetes, upgrading will require users to “replay” the same compose files from v1.x into new v2.0 environments. We plan to ship with some tools to make migration as seamless as possible.</p>
+
+<h4 id="will-i-be-able-to-export-my-environments-from-v10-and-import-them-into-v20">Will I be able to export my environments from v1.0 and import them into v2.0?</h4>
+
+<p>Yes. We will make it easy to export environments from v1.0 to v2.0. However, we don’t recommend moving yet! Rancher v1.6 has become very stable through thousands of deployments, so continue using that until v2.0 is ready.</p>
+
+<h4 id="is-it-possible-to-upgrade-from-rancher-v10-to-v20-without-any-disruption-to-cattle-and-kubernetes-clusters">Is it possible to upgrade from Rancher v1.0 to v2.0 without any disruption to Cattle and Kubernetes clusters?</h4>
+
+<p>At this time, we are still exploring this scenario and taking feedback. We anticipate that you will need to launch a new Rancher instance and then relaunch on v2.0. Once you’ve moved to v2.0, upgrades will be in place, as they are in v1.6.</p>
+
+<h4 id="when-deploying-mutiple-embedded-clusters-from-rancher-v20-will-the-kubernetes-control-plane-for-all-clusters-run-in-the-same-rancher-master-or-will-the-separate-clusters-have-their-own-kubernetes-masters-how-well-will-it-scale">When deploying mutiple embedded clusters from Rancher v2.0, will the Kubernetes control plane for all clusters run in the same Rancher master? or will the separate clusters have their own Kubernetes masters? How well will it scale?</h4>
+
+<p>Please see our <a href="https://cdn2.hubspot.net/hubfs/468859/Whitepapers/Rancher%202.0%20Technical%20Architecture%20-%20Sept%202017.pdf">Rancher v2.0 Architecture</a> document for more information.</p>
+
+<h4 id="can-i-import-openshift-kubernetes-clusters-into-v20">Can I import OpenShift Kubernetes clusters into v2.0?</h4>
+
+<p>Our goal is to run any upstream Kubernetes clusters. Therefore, Rancher v2.0 should work with OpenShift, but we haven’t tested it yet.</p>
+
+<h3 id="support">Support</h3>
+
+<h4 id="what-about-rancher-v16-are-you-planning-some-long-term-support-releases">What about Rancher v1.6? Are you planning some long-term support releases?</h4>
+
+<p>That is definitely the focus of the v1.6 stream. We’re continuing to improve that release, fix bugs, and maintain it for the next 12 months at a minimum. We will extend that time period, if necessary, depending on how quickly users move to v2.0.</p>
+
+<h4 id="does-rancher-v20-support-docker-swarm-and-mesos-as-environment-types">Does Rancher v2.0 support Docker Swarm and Mesos as environment types?</h4>
+
+<p>When creating an environment in Rancher v2.0, Swarm and Mesos will no longer be standard options you can select. However, both Swarm and Mesos will continue to be available as Catalog applications you can deploy. It was a tough decision to make but, in the end, it came down to adoption. For example, out of more than 15,000 clusters, only about 200 or so are running Swarm.</p>
+
+<h4 id="is-it-possible-to-manage-azure-container-services-with-rancher-v20">Is it possible to manage Azure Container Services with Rancher v2.0?</h4>
+<p>Yes. That’s exactly what you can do with an imported environment.</p>
+
+<h4 id="which-databases-does-rancher-v20-support">Which databases does Rancher v2.0 support?</h4>
+
+<p>The Rancher database remains MySQL.</p>
+
+<h4 id="what-about-windows-support">What about Windows support?</h4>
+
+<p>We plan to provide Windows support for v2.0 based on Microsoft’s new approach to providing an overlay network using Kubernetes and CNI. This new approach matches well with what we are doing in v2.0 and, once that is complete, you will be able to leverage the same Rancher UX, or Kubernetes UX, but with Windows. We are in the middle of discussing how we can make this happen with Microsoft, and we will provide more information before the end of this year.</p>
+
+<h4 id="are-you-planning-on-supporting-istio-in-rancher-v20">Are you planning on supporting Istio in Rancher v2.0?</h4>
+
+<p>We like Istio, and it’s something we’re looking at potentially integrating and supporting.</p>
+
+<h4 id="does-rancher-v20-support-hashicorps-vault-for-storing-secrets">Does Rancher v2.0 support Hashicorp’s Vault for storing secrets?</h4>
+
+<p>Yes. We currently support Hashicorp’s Vault in v1.6 and plan on supporting it in v2.0 as well.</p>
+
+<h4 id="will-v20-continue-to-support-different-planes-such-as-data-orchestration-and-compute">Will v2.0 continue to support different planes, such as DATA, ORCHESTRATION, and COMPUTE?</h4>
+
+<p>Yes. We will also allow you to run Kubernetes as a standalone cluster launched from Rancher, but that capability isn’t in the technical preview yet.</p>
+
+<h4 id="does-rancher-v20-support-rkt-containers-as-well">Does Rancher v2.0 support RKT containers as well?</h4>
+
+<p>At this time, we only support Docker. We are looking into containerD as a container runtime in the near future.</p>
+
+<h4 id="will-rancher-v20-support-calico-contiv-contrail-flannel-weave-net-etc-for-embedded-and-imported-kubernetes">Will Rancher v2.0 support Calico, Contiv, Contrail, Flannel, Weave net, etc., for embedded and imported Kubernetes?</h4>
+
+<p>This is something we are still investigating. We hope they will work with Rancher v2.0 with both options. It is unlikely that we will be able to support all networking options as part of Rancher’s support contract.</p>
+
+<h4 id="are-you-planning-on-supporting-traefik-for-existing-setups">Are you planning on supporting Traefik for existing setups?</h4>
+
+<p>We don’t currently plan on providing embedded Traefik support, but we’re still exploring load-balancing approaches.</p>
+
+<h3 id="general">General</h3>
+
+<h4 id="when-will-rancher-v20-be-ready-for-use-in-production">When will Rancher v2.0 be ready for use in production?</h4>
+
+<p>We anticipate Rancher v2.0 will be ready for production use during the first quarter of 2018. Until then, please continue to use v1.6 in production.</p>
+
+<h4 id="how-does-this-architectural-change-impact-how-we-start-rancher">How does this architectural change impact how we start Rancher?</h4>
+
+<p>Unlike Rancher v1.0, Rancher v2.0 includes an embedded Kubernetes master. Therefore, as soon as you start Rancher using this command, for example, you immediately have a Kubernetes cluster up and running:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>docker run -d -p 8080:8080 rancher/server
+</code></pre>
+</div>
+
+<p>You simply need to add compute nodes to complete your first Kubernetes cluster.</p>
+
+<h4 id="can-i-export-all-of-the-configuration-performed-in-the-ui-to-config-files-to-serve-as-a-source-for-rebuilding-infrastructure-as-code">Can I export all of the configuration performed in the UI to config files, to serve as a source for (re)building “infrastructure-as-code”?</h4>
+
+<p>Yes. As in v1.x, all configuration performed in the UI always creates a compose file that you can export for reuse.</p>
+
+<h4 id="can-we-still-add-our-own-infrastructure-services-which-had-a-separate-viewfilter-in-16x">Can we still add our own infrastructure services, which had a separate view/filter in 1.6.x?</h4>
+
+<p>Yes. We plan to eventually enhance this feature so you can manage Kubernetes storage, networking, and its vast ecosystem of add-ons.</p>
+
+<h4 id="can-you-share-some-thoughts-on-how-you-plan-to-integrate-the-cicd-process-into-the-mix">Can you share some thoughts on how you plan to integrate the CI/CD process into the mix?</h4>
+
+<p>Rancher will add a CI/CD pipeline soon after v2.0 launches. We plan to showcase it at our monthly Meetup in November.</p>
+
+<h4 id="will-the-networking-options-in-rancher-v20-change">Will the networking options in Rancher v2.0 change?</h4>
+
+<p>With 2.0, our users continue to have the option of using either Rancher’s IPSec or VXLAN overlay solutions, or using any of the third-party CNI networking plugins in embedded clusters. Because an imported cluster already has a networking plugin plugged in, Rancher supports it by default and doesn’t force users to install our networking solutions. Users can continue to make their own networking choices.</p>
+
+<h4 id="are-you-going-to-integrate-longhorn">Are you going to integrate Longhorn?</h4>
+
+<p>Yes. Longhorn was on a bit of a hiatus while we were working on v2.0. We plan to re-engage on the project once v2.0 reaches GA (general availability).</p>
+
+<h4 id="will-the-api-reflect-differences-as-well">Will the API reflect differences as well?</h4>
+
+<p>Yes. Everything in the Rancher UI is always built on the API.</p>
+
+<h4 id="are-there-changes-to-default-roles-available-now-or-going-forward-will-the-kubernetes-alignment-impact-plans-for-rolesrbac">Are there changes to default roles available now or going forward? Will the Kubernetes alignment impact plans for roles/RBAC?</h4>
+
+<p>The default roles remain the same in v2.0, but we now take advantage of the Kubernetes RBAC (Role-Based Access Control) capabilities to give you more flexibility.</p>
+
+<h4 id="will-the-rancher-nsf-driver-become-available-for-v20">Will the Rancher-NSF driver become available for v2.0?</h4>
+
+<p>Yes. That will be part of the Volumes work coming soon!</p>
+
+<h4 id="will-there-be-any-functions-like-network-policies-to-separate-a-front-end-contrainer-from-a-back-end-container-through-some-kind-of-firewall-in-v20">Will there be any functions like network policies to separate a front-end contrainer from a back-end container through some kind of firewall in v2.0?</h4>
+
+<p>Yes. You can do so by leveraging Kubernetes’ network policies.</p>
+
+<h4 id="will-there-be-a-function-to-allow-for-cross-environment-communication-while-controlling-network-policies-for-example-can-we-manage-egress-and-ingress-controllers-in-rancher-v20">Will there be a function to allow for cross-environment communication while controlling network policies? For example, can we manage egress and ingress controllers in Rancher v2.0?</h4>
+
+<p>Yes. Our goal is to leverage Kubernetes’ network policies to enable this functionality.</p>
+
+<h4 id="will-the-access-control-be-a-pluggable-module-in-which-we-can-provide-our-custom-acl-control">Will the access control be a pluggable module in which we can provide our custom ACL control?</h4>
+
+<p>Yes. That is the plan, as it is in v1.6.</p>
+
+<h4 id="what-about-the-cli-will-that-work-the-same-way-with-the-same-features">What about the CLI? Will that work the same way with the same features?</h4>
+
+<p>Yes. Definitely.</p>
+
+<h4 id="will-rancher-compose-still-work-with-v20">Will Rancher compose still work with v2.0?</h4>
+
+<p>Yes. You’ll be able to use compose in exactly the same way.</p>
+
+<h4 id="if-we-use-kubernetes-native-yaml-files-for-creating-resources-should-we-expect-that-to-work-as-expected-or-do-we-need-to-use-rancherdocker-compose-files-to-deploy-infrastructure">If we use Kubernetes native YAML files for creating resources, should we expect that to work as expected, or do we need to use Rancher/Docker compose files to deploy infrastructure?</h4>
+
+<p>Absolutely. You’ll have both options.</p>
+
+    </div>
+</div>
+</div>
+</div>
+
+<div class="row wrap">
+<a class="btn btn-primary pull-right" href="https://github.com/rancher/rancher.github.io/tree/master/rancher/v2.0/en/faq/index.md">Edit this page <i class="fa fa-pencil"></i></a>
+</div>
+
+<footer class="clearfix">
+  <div class="wrap">
+    <div class=""><!--bottom footer-->
+      <div class="row">
+          <div class="col span-6">
+              <ul id="menu-footer" class="list-inline">
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="About Rancher Labs" href="http://rancher.com/about/">About Rancher Labs</a></li>
+                  <li id="menu-item-11352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11352"><a title="Contact" href="http://rancher.com/contact/">Contact</a></li>
+                  <li id="menu-item-14152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14152"><a title="Privacy" href="http://rancher.com/privacy/">Privacy</a></li>
+                  <li id="menu-item-15635" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15635"><a title="Careers" href="http://rancher.com/careers/">Careers</a></li>
+                  
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="中文文档" href="https://rancher.com/docs/rancher/latest/zh/">中文文档</a></li>
+                  
+              </ul>
+              <p>Copyright &copy; 2014-2017 <a href="http://rancher.com">Rancher Labs</a>. All Rights Reserved.</p>
+          </div>
+          <div class="col span-6 text-right">
+              <ul class="list-inline">
+                  <li><a href="https://github.com/rancher/rancher" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-github.png" alt="Rancher Labs GitHub"></a></li>
+                  <li><a href="https://twitter.com/Rancher_Labs" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-twitter.png" alt="Rancher Labs Twitter"></a></li>
+                  <li><a href="https://slack.rancher.io/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-slack.png" alt="Rancher Labs Slack"></a></li>
+                  <li><a href="https://www.linkedin.com/groups/6977008/profile" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-linkedin.png" alt="Rancher Labs LinkedIn"></a></li>
+                  <li><a href="https://www.facebook.com/rancherlabs/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-fb.png" alt="Rancher Labs Facebook"></a></li>
+              </ul>
+          </div>
+      </div>
+    </div><!--bottom footer-->
+    </div>
+</footer>
+<script src="/docs/vendor/jquery.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/jquery.slicknav.min.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/rancher-docs.js?t=2017-12-04 13:23:19 -0800"></script>
+<!-- Start of Google Analytics -->
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-56382716-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End of Google Analytics -->
+<!-- Start of Async HubSpot Analytics Code -->
+<script type="text/javascript">
+(function(d, s, i, r) {
+    if (d.getElementById(i)) { return; }
+    var n = d.createElement(s),
+        e = d.getElementsByTagName(s)[0];
+    n.id = i;
+    n.src = '//js.hs-analytics.net/analytics/' + (Math.ceil(new Date() / r) * r) + '/468859.js';
+    e.parentNode.insertBefore(n, e);
+})(document, "script", "hs-analytics", 300000);
+</script>
+<!-- End of Async HubSpot Analytics Code -->
+</body>
+
+</html>
+

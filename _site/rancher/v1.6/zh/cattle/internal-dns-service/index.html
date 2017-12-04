@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Internal DNS Service in Cattle Environments</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation for Rancher">
+    <link href="/docs/favicon.png" rel="shortcut icon" type="image/png" sizes="16x16">
+    <link href="/docs/css/syntax.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/font-awesome/css/font-awesome.min.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/vendor/lato/lato.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/lacsso.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/slicknav.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+    <link href="/docs/css/rancher-docs.css?t=2017-12-04 13:23:19 -0800" rel="stylesheet">
+</head>
+
+<body class="bg-default">
+    <div class="row body">
+    <header class="page-header">
+      <div class="wrap clearfix">
+        <nav role="navigation" id="js-responsive-nav" class="clearfix responsive-nav"><a class="nav-toggle"></a>
+          <a class="nav-logo logo-caas btn bg-transparent"><img src="/docs/img/rancher-logo-nopadding.svg" class="img-responsive" alt="Rancher" data-pin-nopin="true"></a>
+          <ul class="nav-main nav-list">
+            <li><a href="http://rancher.com/">Back to Rancher.com</a></li>
+
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="https://github.com/rancher/rancher#installation" id="rnchrdm-nav-download" title="Download Rancher" target="_blank"><img src="/docs/img/header-download.svg" alt="Download Rancher" height="12" width="14"> Download Rancher</a></li>
+              <li><a href="http://rancher.com/support" id="rnchrdm-nav-reqsupport" title="Request Support"><i class="fa fa-question-circle" aria-hidden="true"></i>
+ Request Support</a></li>
+            </ul>
+          </ul>
+      </nav>
+    </div>
+    <h1>Rancher Docs</h1>
+  </header>
+  <div class="clearfix"></div>
+  <div class="wrap clearfix">
+        <div class="col span-3 mt-0 mr-0 sidebar">
+        <!--Start Google Search-->
+              <div class="gcse-search" id="google-search"></div>
+              <script>
+              var match = window.location.pathname.match(/\/rancher\/([^\/]+)/);
+              if (match) {
+                  document.getElementById('google-search').setAttribute('data-defaultToRefinement', match[1]);
+              }
+
+              (function() {
+                  var cx = '007896692384436596364:60akf3bfmxm';
+                  var gcse = document.createElement('script');
+                  gcse.type = 'text/javascript';
+                  gcse.async = true;
+                  gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                  var s = document.getElementsByTagName('script')[0];
+                  s.parentNode.insertBefore(gcse, s);
+              })();
+              </script>
+              <!--End Google Search-->
+
+<ul id="menu">
+    <li><a href="/docs/rancher/v1.6/zh/">简介</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/quick-start-guide/">快速开始</a></li>
+    <li>
+        <a href="#">安装Rancher<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/">安装 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#安装需求">安装需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#rancher-server-标签">Rancher Server标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署-non-ha">启动 Rancher Server - 单容器部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---多节点的ha部署">启动 Rancher Server - 多节点的HA部署</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#ha部署需求">HA部署需求</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---使用外部数据库">启动 Rancher Server - 单容器部署 - 使用外部数据库</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#启动-rancher-server---单容器部署---挂载mysql数据库的数据目录">启动 Rancher Server - 单容器部署 - 挂载MYSQL数据库的数据目录</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#使用aws的elasticclassic-load-balancer作为rancher-server-ha的负载均衡器">使用AWS的ELB作为HA的负载均衡器</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#tls认证使用adopenldap">使用TLS认证的AD/OPENLDAP</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/#在http代理后方启动-rancher-server">在HTTP代理后启动 Rancher Server</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/installing-rancher/selinux/">在SELinux模式下使用Rancher</a></li>
+          <li>
+               <a href="#">安装Rancher并使用SSL<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#需求">需求</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#nginx-配置模版">NGINX配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#apache-配置例子">Apache配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#haproxy-配置例子">HAProxy配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用aws的elastic-load-balancer作为rancher-server-ha的负载均衡器并使用ssl">使用AWS的ELB作为HA的负载均衡器并使用SSL</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#f5-big-ip配置示例">F5 BIG-IP配置示例</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/basic-ssl-config/#使用自签名证书-beta">使用自签名证书</a></li>
+               </ul>
+          </li>
+          <li>
+               <a href="#">内网启动Rancher<i class="pull-right fa fa-angle-down"></i></a>
+               <ul>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用私有镜像仓库">使用私有镜像仓库</a></li>
+                 <li><a href="/docs/rancher/v1.6/zh/installing-rancher/installing-server/no-internet-access/#使用http代理">使用HTTP代理</a></li>
+               </ul>
+          </li>
+        </ul>
+    </li>
+    <li>
+         <a href="#">升级Rancher Server<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/">升级Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#rancher-server-tags">Rancher Server标签</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#基础设施服务]">升级基础设施服务</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#升级ha架构">升级HA架构的Rancher Server</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---外部数据库">升级非HA模式的Rancher Server - 外部数据库</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#单独升级一个容器non-ha---绑定挂载的mysql卷">升级非HA模式的Rancher Server - 绑定挂载的MYSQL卷</a></li>
+           <li><a href="/docs/rancher/v1.6/zh/upgrading/#没有互联网访问的rancher服务器">升级内网中的Rancher Server</a></li>
+        </ul>
+     </li>
+    <li>
+         <a href="#">系统设置<i class="pull-right fa fa-angle-down"></i></a>
+         <ul>
+           <li>
+                <a href="#">访问控制方式<i class="pull-right fa fa-angle-down"></i></a>
+                <ul>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#活动目录">Active Directory</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#azure-ad">Azure AD</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#github">Github</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#本地身份认证">本地身份认证</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#openldap">OpenLDAP</a></li>
+                  <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#shibboleth">Shibboleth</a></li>
+                </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#访问控制">访问控制</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/access-control/#限制并发登陆">限制并发登陆</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/accounts/">账户</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#主机注册">注册主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/settings/#应用商店">应用商店</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/configuration/machine-drivers/">主机驱动</a></li>
+        </ul>
+    </li>
+    <li>
+          <a href="#">环境<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+            <li><a href="/docs/rancher/v1.6/zh/environments/">环境管理</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#什么是环境模版">环境模版</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/environments/#成员角色">环境中的角色</a></li>
+          </ul>
+    </li>
+    <li>
+        <a href="#">主机<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/">主机简介</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#docker版本适用对比">支持的Docker版本</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机标签">主机标签</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#主机调度地址">主机调度地址</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在代理后的主机">在代理后的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/custom/">添加自定义主机</a></li>
+          <li>
+              <a href="#">添加云主机<i class="pull-right fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/amazon/">添加Amazon EC2主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/azure/">添加Azure主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/digitalocean/">添加DigitalOcean主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/exoscale/">添加Exoscale主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/packet/">添加Packet主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/rackspace/">添加Rackspace主机</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/hosts/other/">添加其他云服务商的主机</a></li>
+              </ul>
+          </li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#访问云提供商的主机">访问云提供商的主机</a></li>
+          <li><a href="/docs/rancher/v1.6/zh/hosts/#在rancher内删除主机">删除主机</a></li>
+        </ul>
+    </li>
+    <li>
+      <a href="#">镜像仓库<i class="pull-right fa fa-angle-down"></i></a>
+      <ul>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/">镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#不安全的镜像库">不安全的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#自签名证书">自签名证书</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用亚马逊的ecr镜像库">使用亚马逊的ECR镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#使用google容器镜像仓库">使用Google容器镜像仓库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#更改默认的镜像库">更改默认的镜像库</a></li>
+        <li><a href="/docs/rancher/v1.6/zh/environments/registries/#限制镜像库的使用">限制镜像库的使用</a></li>
+      </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/environments/certificates/">证书</a></li>
+    <li>
+      <a href="#">系统服务<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/">基础设施服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/networking/">网络</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/network-policy/">网络策略</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/load-balancer">负载均衡器</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/dns-service/">DNS服务</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/metadata-service/">Metadata服务</a></li>
+              <li>
+                  <a href="#">存储服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/">存储服务</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-nfs/">Rancher NFS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/storage-service/rancher-ebs/">Rancher EBS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/">调度器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#多ip主机调度">多IP主机调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#基于资源约束的调度">基于资源约束的调度</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/rancher-services/scheduler/#在主机上调度指定服务">在主机上调度指定服务</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/audit-log/">审计日志</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/rancher-services/service-accounts/">服务账号</a></li>
+           </ul>
+    </li>
+    <li>
+          <a href="#">Cattle<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/stacks/">应用</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-services/">服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/volumes/">卷</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/">负载均衡</a></li>
+                <li>
+                    <a href="#">在UI中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#如何在ui上新增一个负载均衡">添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#服务规则">服务规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#选择器规则">选择器规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止">SSL会话终止</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#负载均衡的会话粘性">负载均衡的会话粘性</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义haproxycfg">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#标签调度负载均衡">标签调度负载均衡</a></li>
+                      </ul>
+                </li>
+                <li>
+                    <a href="#">在CLI和Compose中配置负载均衡<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#用rancher-compose-添加负载均衡">用Rancher Compose 添加负载均衡</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#源端口">源端口</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#端口规则">端口规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#证书">证书</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#自定义配置">自定义HAProxy配置</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#会话粘性策略">会话粘性策略</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#load-balancer-example-l7">七层负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#内部负载均衡例子">内部负载均衡示例</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/adding-load-balancers/#ssl会话终止-example">SSL会话终止示例</a></li>
+                      </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-external-services/">外部服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/adding-service-alias/">服务别名</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/health-checks/">健康检查</a></li>
+                <li>
+                    <a href="#">调度服务<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/">调度</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在ui中添加标签">在UI中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#在rancher-compose中添加标签">在Rancher Compose中设置调度规则</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/scheduling/#调度标签表">调度标签表</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/upgrading/">升级服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/internal-dns-service/">Cattle环境中的内部DNS服务</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/external-dns-service/">外部DNS服务</a></li>
+                <li>
+                    <a href="#">Rancher-Compose<i class="pull-right fa fa-angle-down"></i></a>
+                    <ul>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/">Rancher Compose</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/commands/">指令与参数</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/environment-interpolation/">环境插值</a></li>
+                        <li><a href="/docs/rancher/v1.6/zh/cattle/rancher-compose/build/">使用AWS S3构建镜像</a></li>
+                    </ul>
+                </li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/secrets/">密文 - 实验性的</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/webhook-service/">Webhooks</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/cattle/labels/">标签</a></li>
+          </ul>
+    </li>
+    <li>
+          <a href="#">Kubernetes<i class="pull-right fa fa-angle-down"></i></a>
+          <ul>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/">启动Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/resiliency-planes/">弹性平面</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/providers/">Cloud Providers</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/private-registry/">私有镜像仓库</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/rbac/">RBAC</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/disaster-recovery/">灾难恢复</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/backups/">备份</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/storage/">持久化存储</a></li>
+              <li>
+                  <a href="#">插件支持<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/">插件支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#helm">Helm</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/addons/#skydns">SkyDNS</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">Ingress支持与配置<i class="pull-right fa fa-angle-down"></i></a>
+                  <ul>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/">Ingress支持</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#基于主机路由配置-ingress-资源">基于主机路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#使用基于路径的路由配置ingress资源">使用基于路径的路由配置Ingress资源</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例两个负载均衡器使用交替的端口">多个负载均衡器使用不同的端口</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例使用tls">使用 TLS</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#禁用http">禁用HTTP</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例用户定制">示例用户定制</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在所有主机上运行负载均衡器">所有主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在特定主机上运行负载均衡器">特定主机运行负载均衡器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#例将流量导向同一主机上的不同容器">将流量导向同一主机上的不同容器</a></li>
+                      <li><a href="/docs/rancher/v1.6/zh/kubernetes/ingress/#示例在同一主机上对容器的流量进行优先级排序">在同一主机上对容器的流量进行优先级排序</a></li>
+                  </ul>
+              </li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/upgrading/">升级Kubernetes</a></li>
+              <li><a href="/docs/rancher/v1.6/zh/kubernetes/deleting/">删除Kubernetes</a></li>
+
+          </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/zh/mesos/">Mesos</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/swarm/">Swarm - 实验性的 </a></li>
+    <li><a href="/docs/rancher/v1.6/zh/windows/">Windows - 实验性的</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/native-docker/">以原生Docker命令行的形式使用Rancher</a></li>
+    <li>
+            <a href="#">应用商店<i class="pull-right fa fa-angle-down"></i></a>
+            <ul>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/">应用商店</a></li>
+                <li><a href="/docs/rancher/v1.6/zh/catalog/private-catalog/">创建私有应用商店</a></li>
+            </ul>
+        </li>
+    <li><a href="#">Rancher命令行<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/cli/">Rancher命令行</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/commands/">命令和选项</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/cli/variable-interpolation/">变量替换</a></li>
+        </ul>
+    </li>
+    <li><a href="/docs/rancher/v1.6/en/api/v2-beta/">API文档</a></li>
+    <li><a href="/docs/rancher/v1.6/zh/contributing/">Rancher社区贡献</a></li>
+    <li>
+        <a href="#">常见问题<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/server/">Rancher Server的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/agents/">Rancher Agent的常见问题</a></li>
+            <li><a href="/docs/rancher/v1.6/zh/faqs/troubleshooting/">常见的故障排查与修复方法</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="btn-docs">历史文档<i class="pull-right fa fa-angle-down"></i></a>
+        <ul>
+            <li><a href="/docs/rancher/v1.5/zh/">Rancher v1.5</a></li>
+            <li><a href="/docs/rancher/v1.4/zh/">Rancher v1.4</a></li>
+            <li><a href="/docs/rancher/v1.3/zh/">Rancher v1.3</a></li>
+            <li><a href="/docs/rancher/v1.2/zh/">Rancher v1.2</a></li>
+            <li><a href="/docs/rancher/v1.1/zh/">Rancher v1.1</a></li>
+            <li><a href="/docs/rancher/v1.0/en/">Rancher v1.0</a></li>
+        </ul>
+    </li>
+</ul>
+
+</div>
+<div class="col span-9">
+    <div class="content-container">
+        <h2 id="rancher-cattledns">Rancher Cattle环境中的内部DNS服务</h2>
+<hr />
+<p>在Rancher中，我们拥有自己的内部DNS服务，允许同一个<a href="/docs/rancher/v1.6/zh/environments/">环境</a>中的任何服务都可以解析环境中的任何其他服务.</p>
+
+<p>应用中的所有服务都可以通过<code class="highlighter-rouge">&lt;服务名称&gt;</code>解析，并且不需要在服务之间设置服务链接。 创建服务时，你可以定义<code class="highlighter-rouge">服务链接</code>以将服务链接在一起。 对于任何不同应用的服务，你可以通过<code class="highlighter-rouge">&lt;服务名称&gt;.&lt;应用名称&gt;</code>而不是<code class="highlighter-rouge">&lt;服务名称&gt;</code>来解析。 如果你想以不同的名称解析服务，你可以设置服务链接，以便服务可以由服务别名解析.</p>
+
+<h3 id="section">通过链接设置服务别名</h3>
+
+<p>在UI中，<a href="/docs/rancher/v1.6/zh/cattle/adding-services/#在ui中添加服务">添加服务</a>时，展开<strong>服务链接</strong>部分，选择服务，并提供别名.</p>
+
+<p>如果你使用Rancher Compose<a href="/docs/rancher/v1.6/zh/cattle/services/#使用-rancher-compose-添加服务">添加服务</a>，<code class="highlighter-rouge">docker-compose.yml</code>将使用<code class="highlighter-rouge">links</code>或<code class="highlighter-rouge">external_links</code>指令.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
+<span class="s">services</span><span class="pi">:</span>
+  <span class="s">service1</span><span class="pi">:</span>
+    <span class="s">image</span><span class="pi">:</span> <span class="s">wordpress</span>
+    <span class="c1"># 如果其他服务在同一个应用中</span>
+    <span class="s">links</span><span class="pi">:</span>
+    <span class="c1"># &lt;service_name&gt;:&lt;service_alias&gt;</span>
+    <span class="pi">-</span> <span class="s">service2:mysql</span>
+    <span class="c1"># 如果另一个服务是不同的应用</span>
+    <span class="s">external_links</span><span class="pi">:</span>
+    <span class="c1"># &lt;stackname&gt;/&lt;service_name&gt;:&lt;service_alias&gt;</span>
+    <span class="pi">-</span> <span class="s">Default/service3:mysql</span>
+</code></pre>
+</div>
+
+<h3 id="section-1"><code class="highlighter-rouge">从容器</code>和服务连接</h3>
+
+<p>在启动服务时，你可能需要指定只在同一台主机上一起启动服务。 具体的用例包括尝试使用另一个服务中的<code class="highlighter-rouge">volume_from</code>或<code class="highlighter-rouge">net</code>时。 当添加一个<a href="/docs/rancher/v1.6/zh/cattle/adding-services/#sidekick-服务">从容器</a>时，这些服务可以通过他们的名字自动地相互解析。 我们目前不支持通过从容器中的links/external_links来创建服务别名。</p>
+
+<p>当添加一个从容器时，总是有一个主服务和从容器。 它们一起被认为是单个启动配置。 此启动配置将作为一组容器部署到主机上，1个来自主服务器，另一个从每个从容器中定义。 在启动配置的任何服务中，你可以按其名称解析主服务和从容器。 对于启动配置之外的任何服务，主服务可以通过名称解析，但是从容器只能通过<code class="highlighter-rouge">&lt;从容器名称&gt;.&lt;主服务名称&gt;</code>来解析。</p>
+
+<h3 id="section-2">容器名称</h3>
+
+<p>所有容器都可以通过其名称来全局解析，因为每个服务的容器名称在每个环境中都是唯一的。 没有必要附加服务名称或应用名称。</p>
+
+<h4 id="section-3">例子</h4>
+
+<h5 id="ping">ping同一应用中的服务</h5>
+
+<p>如果你执行一个容器的命令行，你可以通过服务名称ping同一应用中的其他服务.</p>
+
+<p>在我们的例子中，有一个名为<code class="highlighter-rouge">stackA</code>的应用，有两个服务，<code class="highlighter-rouge">foo</code>和<code class="highlighter-rouge">bar</code>.</p>
+
+<p>在执行<code class="highlighter-rouge">foo</code>服务中的一个容器之后，你可以ping通<code class="highlighter-rouge">bar</code>服务.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ping bar
+PING bar.stacka.rancher.internal <span class="o">(</span>10.42.x.x<span class="o">)</span> 58<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.63 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.13 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.07 ms
+</code></pre>
+</div>
+
+<h5 id="ping-1">ping不同应用中的服务</h5>
+
+<p>对于不同应用的服务，你可以使用<code class="highlighter-rouge">&lt;服务名称&gt;.&lt;应用名称&gt;</code>在不同的应用中ping服务.</p>
+
+<p>在这个例子中，我们有一个名为<code class="highlighter-rouge">stackA</code>的应用，它包含一个名为<code class="highlighter-rouge">foo</code>的服务，我们有另一个名为<code class="highlighter-rouge">stackB</code>的应用，它包含一个名为<code class="highlighter-rouge">bar</code>的服务.</p>
+
+<p>如果我们执行<code class="highlighter-rouge">foo</code>服务中的一个容器，你可以用<code class="highlighter-rouge">bar.stackb</code>来ping.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ping bar.stackb
+PING bar.stackb <span class="o">(</span>10.42.x.x<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.43 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.15 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.27 ms
+</code></pre>
+</div>
+
+<h5 id="ping-2">ping服务中的从容器</h5>
+
+<p>取决于你从哪个服务ping，你可以通过<code class="highlighter-rouge">&lt;从容器名称&gt;</code>或<code class="highlighter-rouge">&lt;从容器名称&gt;.&lt;主服务名称&gt;</code>来访问从容器服务。</p>
+
+<p>在我们的例子中，我们有一个名为<code class="highlighter-rouge">stackA</code>的应用，它包含一个名为<code class="highlighter-rouge">foo</code>的服务，它有一个从容器<code class="highlighter-rouge">bar</code>和一个名为<code class="highlighter-rouge">hello</code>的服务。 我们也有一个应用叫<code class="highlighter-rouge">stackB</code>，它包含一个服务<code class="highlighter-rouge">world</code>。</p>
+
+<p>如果我们执行<code class="highlighter-rouge">foo</code>服务中的一个容器，你可以直接用`bar’命令ping它。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 在`foo`服务中的一个容器中，`bar`是一个从容器。</span>
+<span class="gp">$ </span>ping bar
+PING bar.foo.stacka.rancher.internal <span class="o">(</span>10.42.x.x<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.060 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.111 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.114 ms
+</code></pre>
+</div>
+
+<p>如果我们执行在同一个应用中的<code class="highlighter-rouge">hello</code>服务的一个容器，你可以通过<code class="highlighter-rouge">foo</code>来ping<code class="highlighter-rouge">foo</code>服务和<code class="highlighter-rouge">bar.foo</code>来ping<code class="highlighter-rouge">bar</code>服务.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 在`hello`服务中的一个容器内部，这不是服务/从容器的一部分</span>
+<span class="c"># Ping主服务(i.e. foo)</span>
+<span class="gp">$ </span>ping foo
+PING foo.stacka.rancher.internal <span class="o">(</span>10.42.x.x<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.04 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.40 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.07 ms
+<span class="c"># Ping从容器(i.e. bar)</span>
+<span class="gp">$ </span>ping bar.foo
+PING bar.foo <span class="o">(</span>10.42.x.x<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.01 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.12 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.05 ms
+</code></pre>
+</div>
+
+<p>如果我们执行<code class="highlighter-rouge">world</code>服务中的一个容器，它是不同的应用，你可以通过<code class="highlighter-rouge">foo.stacka</code>来ping<code class="highlighter-rouge">foo</code>服务和<code class="highlighter-rouge">bar.foo.stacka</code>来ping从容器<code class="highlighter-rouge">bar</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 在`world`服务中的一个容器内，它们位于不同的应用中</span>
+<span class="c"># Ping另一个应用`stacka`中的主服务(i.e. foo)</span>
+<span class="gp">$ </span>ping foo.stacka
+PING foo.stacka <span class="o">(</span>10.42.x.x<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.13 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.05 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.29 ms
+<span class="c"># Ping另一个应用`stacka`中的从容器(i.e. bar)</span>
+<span class="gp">$ </span>ping bar.foo.stacka
+PING bar.foo.stacka <span class="o">(</span>10.42.x.x<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.23 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.00 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.994 ms
+</code></pre>
+</div>
+
+<h5 id="ping-3">Ping容器名称</h5>
+
+<p>从同一个环境下的任何一个容器中，无论它们是否在相同的应用或服务中，你都可以用容器名称来ping其他容器，</p>
+
+<p>在我们的示例中，我们有一个名为<code class="highlighter-rouge">stackA</code>的应用，它包含一个名为<code class="highlighter-rouge">foo</code>的服务。 我们还有另一个应用叫<code class="highlighter-rouge">stackB</code>，它包含一个名为“bar”的服务。 容器的名称是<code class="highlighter-rouge">&lt;stack_name&gt;-&lt;service_name&gt;-&lt;number&gt;</code>。</p>
+
+<p>如果我们执行<code class="highlighter-rouge">foo</code>服务中的一个容器，你可以通过ping来访问<code class="highlighter-rouge">bar</code>服务中的相关容器.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ping stackB-bar-1
+PING stackB-bar-1.rancher.internal <span class="o">(</span>10.42.x.x<span class="o">)</span>: 56 data bytes
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.994 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.090 ms
+64 bytes from 10.42.x.x: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>1.100 ms
+</code></pre>
+</div>
+
+    </div>
+</div>
+</div>
+</div>
+
+<div class="row wrap">
+<a class="btn btn-primary pull-right" href="https://github.com/rancher/rancher.github.io/tree/master/rancher/v1.6/zh/cattle/internal-dns-service/index.md">Edit this page <i class="fa fa-pencil"></i></a>
+</div>
+
+<footer class="clearfix">
+  <div class="wrap">
+    <div class=""><!--bottom footer-->
+      <div class="row">
+          <div class="col span-6">
+              <ul id="menu-footer" class="list-inline">
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="About Rancher Labs" href="http://rancher.com/about/">About Rancher Labs</a></li>
+                  <li id="menu-item-11352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11352"><a title="Contact" href="http://rancher.com/contact/">Contact</a></li>
+                  <li id="menu-item-14152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14152"><a title="Privacy" href="http://rancher.com/privacy/">Privacy</a></li>
+                  <li id="menu-item-15635" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15635"><a title="Careers" href="http://rancher.com/careers/">Careers</a></li>
+                  
+                  <li id="menu-item-14151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14151"><a title="English Docs" href="https://rancher.com/docs/rancher/latest/en/">English Docs</a></li>
+                  
+              </ul>
+              <p>Copyright &copy; 2014-2017 <a href="http://rancher.com">Rancher Labs</a>. All Rights Reserved.</p>
+          </div>
+          <div class="col span-6 text-right">
+              <ul class="list-inline">
+                  <li><a href="https://github.com/rancher/rancher" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-github.png" alt="Rancher Labs GitHub"></a></li>
+                  <li><a href="https://twitter.com/Rancher_Labs" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-twitter.png" alt="Rancher Labs Twitter"></a></li>
+                  <li><a href="https://slack.rancher.io/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-slack.png" alt="Rancher Labs Slack"></a></li>
+                  <li><a href="https://www.linkedin.com/groups/6977008/profile" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-linkedin.png" alt="Rancher Labs LinkedIn"></a></li>
+                  <li><a href="https://www.facebook.com/rancherlabs/" target="_blank"><img src="http://rancher.com/wp-content/themes/rancher-2016/assets/images/social-white-fb.png" alt="Rancher Labs Facebook"></a></li>
+              </ul>
+          </div>
+      </div>
+    </div><!--bottom footer-->
+    </div>
+</footer>
+<script src="/docs/vendor/jquery.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/jquery.slicknav.min.js?t=2017-12-04 13:23:19 -0800"></script>
+<script src="/docs/js/rancher-docs.js?t=2017-12-04 13:23:19 -0800"></script>
+<!-- Start of Google Analytics -->
+<script>
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', 'UA-56382716-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End of Google Analytics -->
+<!-- Start of Async HubSpot Analytics Code -->
+<script type="text/javascript">
+(function(d, s, i, r) {
+    if (d.getElementById(i)) { return; }
+    var n = d.createElement(s),
+        e = d.getElementsByTagName(s)[0];
+    n.id = i;
+    n.src = '//js.hs-analytics.net/analytics/' + (Math.ceil(new Date() / r) * r) + '/468859.js';
+    e.parentNode.insertBefore(n, e);
+})(document, "script", "hs-analytics", 300000);
+</script>
+<!-- End of Async HubSpot Analytics Code -->
+</body>
+
+</html>
+
